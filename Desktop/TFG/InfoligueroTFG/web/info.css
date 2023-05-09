@@ -1,0 +1,359 @@
+.autoleft{
+  float: right;
+}
+.bg-gris{
+    background-color:#C4BFC4;
+}
+.movemenu{
+    animation:tracking-in-expand-forward-bottom 0.4s linear both} 
+    @keyframes tracking-in-expand-forward-bottom{
+        0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(100px);opacity:0}
+        40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}
+}
+.movediv{
+    animation:tracking-in-expand-forward-top 0.4s linear both}
+    @keyframes tracking-in-expand-forward-top{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(-100px);opacity:0}
+    40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
+.fondo{
+    background-image: url(Imagenes/fondo\ cesped.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+footer{
+    position: fixed;
+    left:0px;
+    bottom:0px;
+    height:76px;
+    width:100%;
+}
+.dropdown-menu a:hover {
+    color: blue;
+    font-family: arvo;
+  }
+  /* Texto Plantilla*/ 
+  .plantilla{
+    text-align: left; 
+    font-family: Comic Sans MS; 
+    font-weight:bold; 
+    font-size: 30px; 
+    color: #9378dfd5; 
+    text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68; 
+    }
+
+  /* botones quiz  */
+  .quizbutton {
+    display: inline-block;
+  padding: 10px 20px;
+  background-color: #d7f0b7;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  font-weight: bold;
+  border: 4;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease; 
+  margin: 0 10px;
+  }
+  .quizbutton:hover {
+    background-color: #2E8B57; 
+    transform: scale(1.05); 
+  }
+  
+  .quizbutton:active {
+    transform: scale(0.95); 
+  }
+
+  /* boton enviar  */
+
+.sendbutton {
+    align-items: center;
+    appearance: none;
+    background-clip: padding-box;
+    background-color: initial;
+    background-image: none;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    flex-direction: row;
+    flex-shrink: 0;
+    font-family: Eina01,sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    justify-content: center;
+    line-height: 24px;
+    margin: 0;
+    min-height: 64px;
+    outline: none;
+    overflow: visible;
+    padding: 19px 26px;
+    pointer-events: auto;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    width: auto;
+    word-break: keep-all;
+    z-index: 0;
+  }
+  
+  @media (min-width: 768px) {
+    .sendbutton {
+      padding: 19px 32px;
+    }
+  }
+  
+  .sendbutton:before,
+  .sendbutton:after {
+    border-radius: 80px;
+  }
+  
+  .sendbutton:before {
+    background-image: linear-gradient(92.83deg, #3b8ab8 0, #1a3ea0 100%);
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -2;
+  }
+  
+  .sendbutton:after {
+    background-color: initial;
+    background-image: linear-gradient(#1e1692 0, #0c0d0d 100%);
+    bottom: 4px;
+    content: "";
+    display: block;
+    left: 4px;
+    overflow: hidden;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    transition: all 100ms ease-out;
+    z-index: -1;
+  }
+  
+  .sendbutton:hover:not(:disabled):before {
+    background: linear-gradient(92.83deg, rgb(88, 202, 60) 0%, rgb(56, 168, 21) 100%);
+  }
+  
+  .sendbutton:hover:not(:disabled):after {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition-timing-function: ease-in;
+    opacity: 0;
+  }
+  
+  .sendbutton:active:not(:disabled) {
+    color: #ccc;
+  }
+  
+  .sendbutton:active:not(:disabled):before {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, rgb(88, 202, 60) 0,  rgb(56, 168, 21) 100%);
+  }
+  
+  .sendbutton:active:not(:disabled):after {
+    background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    top: 4px;
+  }
+  
+  .sendbutton:disabled {
+    cursor: default;
+    opacity: .24;
+  }
+
+  /*Cancel BUTTON */
+  
+.cancelbutton {
+  background-color: #d1664b;
+  border-radius: 100px;
+  box-shadow: rgba(199, 45, 6, 0.938) 0 -25px 18px -14px inset,rgba(187, 59, 42, 0.15) 0 1px 2px,rgba(207, 14, 0, 0.432) 0 2px 4px,rgba(168, 113, 31, 0.15) 0 4px 8px,rgba(146, 56, 21, 0.15) 0 8px 16px,rgba(219, 62, 0, 0.15) 0 16px 32px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.cancelbutton:hover {
+  transform: scale(1.05) rotate(-1deg);
+  color: white;
+}
+
+/*LOGIN BUTTON */
+  
+.loginbutton {
+    background-color: #88dd56;
+    border-radius: 100px;
+    box-shadow: rgba(28, 116, 16, 0.938) 0 -25px 18px -14px inset,rgba(12, 12, 12, 0.15) 0 1px 2px,rgba(61, 155, 49, 0.432) 0 2px 4px,rgba(105, 206, 38, 0.15) 0 4px 8px,rgba(146, 56, 21, 0.15) 0 8px 16px,rgba(219, 62, 0, 0.15) 0 16px 32px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .loginbutton:hover {
+    transform: scale(1.05) rotate(-1deg);
+    color: white;
+  }
+  
+  /*Seleccion BUTTON */
+  
+.seleccionbutton {
+    background-color: #72d4e6;
+    border-radius: 100px;
+    box-shadow: rgba(49, 154, 158, 0.384) 0 -25px 18px -14px inset,rgba(12, 12, 12, 0.15) 0 1px 2px,rgba(51, 112, 182, 0.432) 0 2px 4px,rgba(51, 112, 182, 0.432) 0 4px 8px,rgba(151, 91, 52, 0.432) 0 8px 16px,rgba(146, 81, 81, 0.432) 0 16px 32px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .seleccionbutton:hover {
+    transform: scale(1.05) rotate(-1deg);
+    color: white;
+  }
+
+/*QUIZ AND INFO BUTTON */ 
+.buttonquizandinfo {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.buttonquizandinfo:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.buttonquizandinfo:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+/*colorborde div jugadores*/
+.colorborde:before {
+    content: "";
+    background: linear-gradient(
+      45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+  }
+
+  /*Contador*/
+  .simply-countdown-inline{
+  background-color: #0c0d0d;
+  color: white;
+  }
