@@ -4,16 +4,251 @@
     Author     : Iván Juárez
 --%>
 
+<%@page import="entities.Jugador"%>
+<%@page import="entities.Usuario"%>
+<%@page import="java.util.List"%>
+<%@page import="entities.Equipo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<!doctype html>
+<html lang="en">
 
-<!DOCTYPE html borrrar>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Infoliguero</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<head>
+    <title>InfoLiguero</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <!-- <link rel="stylesheet" href="info.css">-->
+    <link href="info.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body class="fondo">
+    
+     <%
+         List<Equipo> equipos = (List<Equipo>) session.getAttribute("equipos");
+           List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
+     
+         Usuario user = (Usuario) session.getAttribute("user");
+        %>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-danger p-2 movemenu">
+        <a class="navbar-brand" href="#"><img src="img/logo.png" class="w-25" alt=""></a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="Controller?op=inicio">Volver a la central </a>
+                </li>
+            </ul>
+            <ul>
+                 <li class="list-unstyled text-white " id="app">
+                <h2><i>{{title}}</i></h2>
+
+            </li>
+            </ul>
+           
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+                <li class="nav-item dropdown  rounded-pill mr-5">
+                    <a class="nav-link dropdown-toggle seleccionbutton" href="#" id="dropdownId" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Selecciona Liga</a>
+                    <div id="ligas" class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item movediv" href="#">{{laliga}}</a>
+                        <a class="dropdown-item movediv" href="#">{{premier}}</a>
+                        <a class="dropdown-item movediv" href="#">{{serie}}</a>
+                        <a class="dropdown-item movediv" href="#">{{bundesliga}} </a>
+                        <a class="dropdown-item movediv" href="#">{{ligue}}</a>
+                    </div>
+                </li>
+                <li class="ms-auto">
+                     <% if (user!=null) {%>
+                     <h5 class="text-white">Bienvenido <%=user.getNick()%> </h5><a href="Controller?op=logout"><button class="cancelbutton ml-3">Logout</button></a>
+                    <%} else {%>
+                    <button class="loginbutton " data-toggle="modal" data-target="#modallogin">
+                        Login <img src="" alt="" class="w-25 pl-1"></button>
+                         <%}
+            %>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="bg-danger text-center  justify-content-center row">
+     <% for(Equipo equipo : equipos){%>   
+        <!-- Esto nos lo hara un bucle que sacara las imagnenes de la bbdd -->       
+              <a class="nav-link" class="active" href="Controller?op=vaequipo&equipo=<%=equipo.getId()%>"><img src="<%=equipo.getImagen()%>"alt=""></a>  
+
+    <%}%>
+      </div>
+    <div class="text-center pt-3 movemenu text-danger plantilla">
+        <h2><strong>Plantilla del Mallorca</strong> </h2>
+    </div>
+    <div class="container  ">
+
+        <div class="row justify-content-center px-3 mt-5">
+<% for(Jugador jugador : jugadores){%>   
+            <div class="col-md-6 col-lg-4 p-3 movediv">
+                <div class="card h-100 colorborde">
+                    <div class="card-body ">
+                        <img src="<%=jugador.getFoto()%>" class="float-left w-50" alt="">    
+                        <div class="text-right">
+                            <h3 class="ml-"><%=jugador.getNombre()%></h3>
+                            <h5> Edad: <%=jugador.getEdad()%></h5>
+                            <h5><%=jugador.getPosicion()%></h5>
+                            <p> Dorsal: <%=jugador.getDorsal()%></p>
+                            <p><%=jugador.getFechaNacimiento()%></p>
+                            <p><%=jugador.getPais()%></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<%}%>
+
+        </div>
+
+    </div>
+
+    <div class="mt-4 ">
+        <div class=" float-right mb-5 mr-4 ">
+            <a class="twitter-timeline " data-width="300" data-height="500" data-theme="dark"
+                href="https://twitter.com/Ivan_killer9?ref_src=twsrc%5Etfw">Tweets by Ivan_killer9</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+        </div>
+
+        <!-- Este Div solo aparecera si estas logeado -->
+        <div class=" float-left  text-center ml-4 ">
+            <h2 class="plantilla"> <strong>¡Atrevete con el quiz!</strong></h2>
+            <div id="contador" class="simply-countdown-inline">
+            
+            </div>
+            <div class="mt-3">
+                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">
+                    Quiz de la liga </button>
+                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalinfo">
+                    Informacion Quiz</button>
+            </div>
+
+        </div>
+
+        <footer class="bg-danger p-3 text-center text-white ">
+            <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>
+        </footer>
+    </div>
+
+
+    <!-- Modal login-->
+    <div class="modal fade" id="modallogin" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login & Register</h5>
+                </div>
+                <form action="Controller?op=login" method="post">
+                    <div class="modal-body text-center">
+                        <p>
+                            <input type="text" name="nick" id="" placeholder="Usuario">
+                        </p>
+                        <p>
+                            <input type="text" name="pass" id="" placeholder="Contraseña">
+                        </p>
+
+
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="submit" class="btn loginbutton">Login & Register</button>
+                        <button type="button" class="btn cancelbutton" data-dismiss="modal"> &times; Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Quiz-->
+    <div class="modal fade" id="modalquiz" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">La pregunta del dia: ¿Cual es el Primer nombre de Le Normand, Jugador de la
+                        Real Sociedad?</h5>
+                </div>
+                <form action="Controller?op=login" method="post">
+                    <div class="modal-body d-flex">
+                        <div class="flex-fill quizbutton">
+                            <button class="quizbutton" type="submit">Robin</button>
+                            <button class="quizbutton" type="submit">Olivier</button>
+                        </div>
+
+                    </div>
+                    <div class="modal-body d-flex">
+                        <div class="flex-fill  quizbutton">
+                            <button class="quizbutton" type="submit">Unai</button>
+                            <button class="quizbutton" type="submit">Mathieu</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success sendbutton">Enviar Respuesta</button>
+                        <button type="button" class="btn cancelbutton" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal InfoQUIZ-->
+    <div class="modal fade" id="modalinfo" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Informacion de nuestro Quiz</h5>
+                </div>
+                <form action="Controller?op=login" method="post">
+                    <div class="modal-body">
+                        <p>
+                            El quiz consiste en adivinar correctamente la pregunta del dia.
+                        </p>
+                        <p>
+                            Si logras contestar correctamente la pregunta, al dia siguiente podras volver a hacer el
+                            reto de contestar correctamente otra pregunta.
+                        </p>
+                        <p>
+                            Si de lo contrario fallas la pregunta, no podras responder la pregunta del siguiente dia,
+                            tendras que esperar 24h.
+                        </p>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn cancelbutton" data-dismiss="modal">Entendido</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script type="text/JavaScript" src="vue.js"> </script>
+    <script type="text/JavaScript" src="./my.js"> </script>
+    <script>
+        const myApp = app.mount("#app");
+        const myliga = liga.mount("#ligas");
+    </script>
+
+    <script src="simplyCountdown.min.js"></script>
+    <script src="contador.js"></script>
+
+</body>
+
 </html>

@@ -1,8 +1,15 @@
 package controller;
 
+import entities.Equipo;
+import entities.Jugador;
+import entities.Usuario;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +47,13 @@ public class Controller extends HttpServlet {
 		 * Crear el singleton con
          */
 
+         Query q;
+         List <Equipo> equipos;
+          Usuario user = null;
+          Equipo equiposelected;
+          List <Jugador> jugadores ;
+          EntityTransaction t;
+         
         EntityManager em = (EntityManager) session.getAttribute("em");
         if (em == null) {
             em = JPAUtil.getEntityManagerFactory().createEntityManager();
@@ -48,11 +62,57 @@ public class Controller extends HttpServlet {
 
         String op = request.getParameter("op");
         if (op.equals("inicio")) {
-            // ...
+          q =  em.createNamedQuery("Equipo.findAll");   //me bajo todos los equipos
+           equipos  = (List <Equipo>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
+            session.setAttribute("equipos", equipos);        
+            
+            session.removeAttribute("jugadores");
+            
             request.getRequestDispatcher("home.jsp").forward(request, response);
-        } else if (op.equals("...")) {
-            //...
+        } else if (op.equals("vaequipo")) {
+            String idequipo = request.getParameter("equipo");
+            //lo busco en la bbdd
+            equiposelected = em.find(Equipo.class, Integer.parseInt(idequipo));
+            jugadores = equiposelected.getJugadorList();
+            
+            session.setAttribute("jugadores", jugadores);
+            session.setAttribute("equipo", idequipo);
+            
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        }else if (op.equals("login")) {
+            
+             String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
+             String pass = request.getParameter("pass");
+             
+             q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = '"+nick+"' and u.pass ='"+pass+"'");
+              try {
+                user = (Usuario) q.getSingleResult();
+            } catch (NoResultException e) {
+            }
+                     
+           
+            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+                  user = new Usuario(1);
+                  user.setNick(nick);
+ 		  user.setPass(pass);
+                
+                //con estas lineas hacemos el insert, para inserta el dato en la base de datos 
+                  t = em.getTransaction(); //lo inserto en la  base de datos
+                  t.begin();
+                  em.persist(user);          
+                  t.commit();       
+            }      
+            
+            
+             session.setAttribute("user", user);
+             request.getRequestDispatcher("home.jsp").forward(request, response);
+        }else if (op.equals("logout")) {
+            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
+             session.removeAttribute("user");
+            //Recargamos la home.jsp
+            request.getRequestDispatcher("home.jsp").forward(request, response);
         }
+         
     }
 
     /**

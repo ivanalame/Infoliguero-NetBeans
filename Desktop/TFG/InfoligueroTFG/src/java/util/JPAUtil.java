@@ -15,7 +15,7 @@ public class JPAUtil {
     private static final EntityManagerFactory emf;
     static{
         try{
-            emf=Persistence.createEntityManagerFactory("JPAPueblosPU");
+            emf=Persistence.createEntityManagerFactory("InfoligueroTFGPU");
         } catch (Throwable ex) {
             System.err.println("Error al crear SessionFactoty."+ ex);
             throw new ExceptionInInitializerError(ex);
