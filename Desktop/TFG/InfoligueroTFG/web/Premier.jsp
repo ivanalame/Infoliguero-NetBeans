@@ -1,17 +1,11 @@
 <%-- 
-    Document   : home
-    Created on : 08-may-2023, 10:33:11
+    Document   : PremierJSP
+    Created on : 15-may-2023, 15:53:07
     Author     : Iván Juárez
 --%>
 
-<%@page import="java.time.LocalTime"%>
-<%@page import="entities.Respuesta"%>
-<%@page import="entities.Pregunta"%>
-<%@page import="entities.Jugador"%>
 <%@page import="entities.Usuario"%>
 <%@page import="java.util.List"%>
-<%@page import="entities.Equipo"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!doctype html>
@@ -24,22 +18,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-   <!-- <link rel="stylesheet" href="info.css">-->
-    <link href="info.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="info.css">
 </head>
 
 <body class="fondo">
-    
      <%
-         List<Equipo> equipos = (List<Equipo>) session.getAttribute("equipos");
-          List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
-          List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
-          List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
+       //  List<Equipo> equipos = (List<Equipo>) session.getAttribute("equipos");
+         // List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
+       //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
+        //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
      
          Usuario user = (Usuario) session.getAttribute("user");
         %>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-danger p-2 movemenu">
+    
+    <nav class="navbar navbar-expand-sm navbar-dark bg-purple p-2 movemenu">
         <a class="navbar-brand" href="#"><img src="img/logo.png" class="w-25" alt=""></a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,35 +42,36 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="Controller?op=inicio">Volver a la central </a>
+                    <a class="nav-link" href="#">Volver a la central <span class="sr-only">(current)</span></a>
                 </li>
-            </ul>
-            <ul>
-                 <li class="list-unstyled text-white " id="app">
-                <h2><i>{{title}}</i></h2>
 
-            </li>
+            </ul>
+            <ul >
+                <li class="list-unstyled text-white " id="app">
+                <h2><i>{{title}}</i></h2>
+                </li>
+
             </ul>
            
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                 <li >
-                     <img src="img/LaLiga_Santander_logo__stacked_.svg-removebg-preview-removebg-preview.png" alt="" class="w-25">
+                <li >
+                    <img src="img/dd-removebg-preview.png" alt="" class="w-50">
                 </li>
-
-                <li class="nav-item dropdown  rounded-pill mr-5">
+                
+                <li class="nav-item dropdown rounded-pill">
                     <a class="nav-link dropdown-toggle seleccionbutton" href="#" id="dropdownId" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Selecciona Liga</a>
                     <div id="ligas" class="dropdown-menu" aria-labelledby="dropdownId">
                         <a class="dropdown-item movediv" href="Controller?op=inicio">{{laliga}}</a>
-                        <a class="dropdown-item movediv" href="Controller?op=vapremier">{{premier}}</a>
+                        <a class="dropdown-item movediv" href="#">{{premier}}</a>
                         <a class="dropdown-item movediv" href="#">{{serie}}</a>
                         <a class="dropdown-item movediv" href="#">{{bundesliga}} </a>
                         <a class="dropdown-item movediv" href="#">{{ligue}}</a>
                     </div>
                 </li>
-                <li class="ms-auto">
+               <li class="ms-auto">
                      <% if (user!=null) {%>
-                     <h5 class="text-white">Bienvenido <%=user.getNick()%> </h5><a href="Controller?op=logout"><button class="cancelbutton ml-3">Logout</button></a>
+                     <h5 class="text-white">Bienvenido <%=user.getNick()%> </h5><a href="Controller?op=logoutpremier"><button class="cancelbutton ml-3">Logout</button></a>
                     <%} else {%>
                     <button class="loginbutton " data-toggle="modal" data-target="#modallogin">
                         Login <img src="" alt="" class="w-25 pl-1"></button>
@@ -86,39 +81,61 @@
             </ul>
         </div>
     </nav>
-    <div class="bg-danger text-center  justify-content-center row">
-     <% for(Equipo equipo : equipos){%>   
-        <!-- Esto nos lo hara un bucle que sacara las imagnenes de la bbdd -->       
-              <a class="nav-link" class="active" href="Controller?op=vaequipo&equipo=<%=equipo.getId()%>"><img src="<%=equipo.getImagen()%>"alt=""></a>  
-
-    <%}%>
-      </div>
+    <div class="bg-purple text-center">
+        
+             <!-- Esto nos lo hara un bucle que sacara las imagnenes de la bbdd -->
+    
+         <a href="" ><img src="Imagenes/181.png" class="" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        <a href=""><img src="Imagenes/181.png" alt=""></a>
+        
+        </form>
+       
+        
+    </div>
     <div class="text-center pt-3 movemenu text-danger plantilla">
         <h2><strong>Plantilla del Mallorca</strong> </h2>
     </div>
-    <div class="container  ">
+    <div class="container">
+ 
 
-         
-        
-        <div class="row justify-content-center px-3 mt-5">
-<% for(Jugador jugador : jugadores){%>   
+        <div class="row justify-content-center px-3">
+
             <div class="col-md-6 col-lg-4 p-3 movediv">
                 <div class="card h-100 colorborde">
                     <div class="card-body ">
-                        <img src="<%=jugador.getFoto()%>" class="float-left w-50" alt="">    
+                        <img src="Imagenes/db5201de-ca4e-4195-8c5b-796051a45611.jpg" class="float-left w-50" alt="">
                         <div class="text-right">
-                            <h3 class="ml-"><%=jugador.getNombre()%></h3>
-                            <h5> Edad: <%=jugador.getEdad()%></h5>
-                            <h5><%=jugador.getPosicion()%></h5>
-                            <p> Dorsal: <%=jugador.getDorsal()%></p>
-                            <p><%=jugador.getFechaNacimiento()%></p>
-                            <p><%=jugador.getPais()%></p>
+                            <h3 class="ml-">Nombre</h3>
+                            <h5>edad</h5>
+                            <h5>Posicion</h5>
+                            <p>Dorsal</p>
+                            <p>Fecha de nacimiento</p>
+                            <p>Pais</p>
 
                         </div>
                     </div>
                 </div>
             </div>
-<%}%>
+
+
 
         </div>
 
@@ -126,12 +143,12 @@
 
     <div class="mt-4 ">
         <div class=" float-right mb-5 mr-4 ">
-          <a class="twitter-timeline" data-lang="es" data-width="400" data-height="500" data-theme="dark" 
+            <a class="twitter-timeline" data-lang="es" data-width="400" data-height="500" data-theme="dark" 
              href="https://twitter.com/ivanJua16758008?ref_src=twsrc%5Etfw">Tweets by ivanJua16758008</a> 
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
 
-           <% if (user!=null) {%>
+        </div>
+        <% if (user!=null) {%>
         <!-- Este Div solo aparecera si estas logeado -->
         <div class=" float-left  text-center ml-4 ">
             <h2 class="plantilla"> <strong>¡Atrevete con el quiz!</strong></h2>
@@ -139,18 +156,17 @@
             
             </div>
             <div class="mt-3">
-                
-         <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz" >
-                    Quiz de la liga </button>
+                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">
+                    Quiz Premier League </button>
                 <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalinfo">
-                    Informacion Quiz</button>        
+                    Informacion Quiz</button>
             </div>
 
         </div>
-         <%}
+          <%}
             %>
 
-        <footer class="bg-danger p-3 text-center text-white ">
+        <footer class="bg-purple p-3 text-center text-white ">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>
         </footer>
     </div>
@@ -164,7 +180,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Login & Register</h5>
                 </div>
-                <form action="Controller?op=login" method="post">
+                <form action="Controller?op=loginpremier" method="post">
                     <div class="modal-body text-center">
                         <p>
                             <input type="text" name="nick" id="" placeholder="Usuario">
@@ -189,22 +205,21 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    
-                    <h5 class="modal-title">La pregunta del dia: ¿Cual es el Primer nombre de Le Normand, Jugador de la Real Sociedad?</h5>
-                    
+                    <h5 class="modal-title">La pregunta del dia: ¿Cual es el Primer nombre de Le Normand, Jugador de la
+                        Real Sociedad?</h5>
                 </div>
                 <form action="Controller?op=varespuesta" method="post">
                     <div class="modal-body d-flex">
                         <div class="flex-fill quizbutton">
-                            <button class="quizbutton" type="text">Robin</button>
-                            <button class="quizbutton" type="text">Olivier</button>
+                            <button class="quizbutton" type="submit">Robin</button>
+                            <button class="quizbutton" type="submit">Olivier</button>
                         </div>
 
                     </div>
                     <div class="modal-body d-flex">
                         <div class="flex-fill  quizbutton">
-                            <button class="quizbutton" type="text">Unai</button>
-                            <button class="quizbutton" type="text">Mathieu</button>
+                            <button class="quizbutton" type="submit">Unai</button>
+                            <button class="quizbutton" type="submit">Mathieu</button>
                         </div>
                     </div>
 
@@ -250,9 +265,15 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <script type="text/JavaScript" src="vue.js"> </script>
     <script type="text/JavaScript" src="./my.js"> </script>

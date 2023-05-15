@@ -14,7 +14,9 @@
     overflow-x: hidden;
     
 }
-
+.bg-purple{
+  background-color: purple;
+}
 .movemenu{
     animation:tracking-in-expand-forward-bottom 0.4s linear both} 
     @keyframes tracking-in-expand-forward-bottom{
