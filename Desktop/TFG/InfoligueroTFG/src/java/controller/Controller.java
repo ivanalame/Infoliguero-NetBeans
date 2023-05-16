@@ -83,8 +83,30 @@ public class Controller extends HttpServlet {
             session.setAttribute("jugadores", jugadores);
             session.setAttribute("equipo", idequipo);
             
+              session.removeAttribute("jugadoresfiltrados");
+             
             request.getRequestDispatcher("home.jsp").forward(request, response);
-        }else if (op.equals("login")) {
+           
+        } else if (op.equals("vaposicion")) {
+            
+             List <Jugador> jugadoresfiltrados ;
+             //posicion contiene Portero, por ejemplo
+            String posicion = request.getParameter("posicion");
+            String idequipo = request.getParameter("equipoId");
+            
+            q = em.createQuery("SELECT j FROM Jugador j WHERE j.posicion = :posicion AND j.idEquipo.id = :equipoId");          
+            
+            q.setParameter("posicion", posicion);
+           q.setParameter("equipoId", Integer.parseInt(idequipo));
+            jugadoresfiltrados = (List <Jugador>)q.getResultList();   
+            
+            session.setAttribute("jugadoresfiltrados", jugadoresfiltrados);   
+            session.setAttribute("equipo", idequipo);
+
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+              
+            
+        } else if (op.equals("login")) {
             
              String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
              String pass = request.getParameter("pass");
@@ -126,7 +148,7 @@ public class Controller extends HttpServlet {
           
             request.getRequestDispatcher("home.jsp").forward(request, response);
          } else if (op.equals("vapremier")) {
-          
+          //Cargar escudos premier
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
           }else if (op.equals("loginpremier")) {
             

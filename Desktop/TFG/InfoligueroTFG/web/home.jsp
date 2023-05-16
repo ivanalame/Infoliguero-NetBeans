@@ -34,9 +34,11 @@
      <%
          List<Equipo> equipos = (List<Equipo>) session.getAttribute("equipos");
           List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
+          List<Jugador> jugadoresfiltrados = (List<Jugador>) session.getAttribute("jugadoresfiltrados");
           List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
           List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
      
+          Equipo idequipo = (Equipo) session.getAttribute("idequipo");
          Usuario user = (Usuario) session.getAttribute("user");
         %>
     <nav class="navbar navbar-expand-sm navbar-dark bg-danger p-2 movemenu">
@@ -92,16 +94,28 @@
               <a class="nav-link" class="active" href="Controller?op=vaequipo&equipo=<%=equipo.getId()%>"><img src="<%=equipo.getImagen()%>"alt=""></a>  
 
     <%}%>
-      </div>
-    <div class="text-center pt-3 movemenu text-danger plantilla">
-        <h2><strong>Plantilla del Mallorca</strong> </h2>
+      </div>      
+    <div class="text-center pt-3 movemenu text-danger plantilla">   
+             <h2><strong>Plantilla del </strong> </h2>     
     </div>
+      
     <div class="container  ">
-
-         
+     
+        <div class="row justify-content-center mx-4 pt-3">
+           
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Portero&equipoId=${sessionScope.idEquipo}">Portero</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Defensa&equipoId=3">Defensa</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Centrocampista&equipoId=3">Centrocampista</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Delantero&equipoId=3">Delantero</a>
+           
+        </div>
         
         <div class="row justify-content-center px-3 mt-5">
-<% for(Jugador jugador : jugadores){%>   
+          
+            
+<%      
+    if (jugadoresfiltrados == null) {
+            for(Jugador jugador : jugadores){%>   
             <div class="col-md-6 col-lg-4 p-3 movediv">
                 <div class="card h-100 colorborde">
                     <div class="card-body ">
@@ -118,10 +132,41 @@
                     </div>
                 </div>
             </div>
-<%}%>
+<%}%>    
+   
+       <%} else {
+            for(Jugador jugador : jugadoresfiltrados){ %> 
+        <div class="col-md-6 col-lg-4 p-3 movediv">
+                <div class="card h-100 colorborde">
+                    <div class="card-body ">
+                        <img src="<%=jugador.getFoto()%>" class="float-left w-50" alt="">    
+                        <div class="text-right">
+                            <h3 class="ml-"><%=jugador.getNombre()%></h3>
+                            <h5> Edad: <%=jugador.getEdad()%></h5>
+                            <h5><%=jugador.getPosicion()%></h5>
+                            <p> Dorsal: <%=jugador.getDorsal()%></p>
+                            <p><%=jugador.getFechaNacimiento()%></p>
+                            <p><%=jugador.getPais()%></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+  <% } %>    
+    <% } %>
 
         </div>
 
+    <% if (jugadoresfiltrados != null) { %>
+  <h1>jugadoresfiltrados:</h1>
+  <ul>
+  <% for(Jugador jugador : jugadoresfiltrados){ %> 
+    <li><%= jugador.toString() %></li>
+  <% } %>
+  </ul>
+<% } else { %>
+  <p>jugadoresfiltrados is null</p>
+<% } %>
     </div>
 
     <div class="mt-4 ">

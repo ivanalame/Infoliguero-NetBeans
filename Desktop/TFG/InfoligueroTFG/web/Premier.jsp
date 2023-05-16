@@ -42,7 +42,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Volver a la central <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="Controller?op=vapremier">Volver a la central <span class="sr-only">(current)</span></a>
                 </li>
 
             </ul>
@@ -69,7 +69,7 @@
                         <a class="dropdown-item movediv" href="#">{{ligue}}</a>
                     </div>
                 </li>
-               <li class="ms-auto">
+               <li class="ms-auto pl-5">
                      <% if (user!=null) {%>
                      <h5 class="text-white">Bienvenido <%=user.getNick()%> </h5><a href="Controller?op=logoutpremier"><button class="cancelbutton ml-3">Logout</button></a>
                     <%} else {%>
