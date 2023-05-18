@@ -1,6 +1,7 @@
 package controller;
 
 import entities.Equipo;
+import entities.Equipop;
 import entities.Jugador;
 import entities.Pregunta;
 import entities.Respuesta;
@@ -51,6 +52,7 @@ public class Controller extends HttpServlet {
 
          Query q;
          List <Equipo> equipos;
+         List <Equipop> equipospremier;
           Usuario user = null;
           Equipo equiposelected;
           List <Jugador> jugadores ;
@@ -81,23 +83,25 @@ public class Controller extends HttpServlet {
             jugadores = equiposelected.getJugadorList();
             
             session.setAttribute("jugadores", jugadores);
-            session.setAttribute("equipo", idequipo);
+            
+            session.setAttribute("equiposelected", equiposelected);  //ver
+            session.setAttribute("nombre", equiposelected.getNombre()); // agrego el nombre del equipo
             
               session.removeAttribute("jugadoresfiltrados");
              
             request.getRequestDispatcher("home.jsp").forward(request, response);
            
-        } else if (op.equals("vaposicion")) {
-            
+        } else if (op.equals("vaposicion")) { 
              List <Jugador> jugadoresfiltrados ;
              //posicion contiene Portero, por ejemplo
             String posicion = request.getParameter("posicion");
-            String idequipo = request.getParameter("equipoId");
+             String idequipo = request.getParameter("equipoId");
+             
+           q = em.createQuery("SELECT j FROM Jugador j WHERE j.posicion = :posicion AND j.idEquipo.id = :equipoId");          
             
-            q = em.createQuery("SELECT j FROM Jugador j WHERE j.posicion = :posicion AND j.idEquipo.id = :equipoId");          
-            
+          
             q.setParameter("posicion", posicion);
-           q.setParameter("equipoId", Integer.parseInt(idequipo));
+            q.setParameter("equipoId", Integer.parseInt(idequipo));
             jugadoresfiltrados = (List <Jugador>)q.getResultList();   
             
             session.setAttribute("jugadoresfiltrados", jugadoresfiltrados);   
@@ -147,8 +151,12 @@ public class Controller extends HttpServlet {
          } else if (op.equals("vapregunta")) {
           
             request.getRequestDispatcher("home.jsp").forward(request, response);
+         
          } else if (op.equals("vapremier")) {
-          //Cargar escudos premier
+           q =  em.createNamedQuery("Equipop.findAll");   //me bajo todos los equipos
+           equipospremier  = (List <Equipop>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
+            session.setAttribute("equiposp", equipospremier);  
+             
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
           }else if (op.equals("loginpremier")) {
             

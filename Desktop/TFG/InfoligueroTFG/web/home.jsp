@@ -38,7 +38,7 @@
           List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
           List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
      
-          Equipo idequipo = (Equipo) session.getAttribute("idequipo");
+         // Equipo idequipo = (Equipo) session.getAttribute("idequipo");  //ver 
          Usuario user = (Usuario) session.getAttribute("user");
         %>
     <nav class="navbar navbar-expand-sm navbar-dark bg-danger p-2 movemenu">
@@ -88,26 +88,29 @@
             </ul>
         </div>
     </nav>
+                
     <div class="bg-danger text-center  justify-content-center row">
      <% for(Equipo equipo : equipos){%>   
-        <!-- Esto nos lo hara un bucle que sacara las imagnenes de la bbdd -->       
-              <a class="nav-link" class="active" href="Controller?op=vaequipo&equipo=<%=equipo.getId()%>"><img src="<%=equipo.getImagen()%>"alt=""></a>  
-
+        <!-- Esto nos lo hara un bucle que sacara las imagnenes de la bbdd -->    
+              <a class="nav-link" class="active"  href="Controller?op=vaequipo&equipo=<%=equipo.getId()%>&nombre=<%=equipo.getNombre()%>"><img src="<%=equipo.getImagen()%>" class="w-100" alt=""></a>  
+       
     <%}%>
-      </div>      
-    <div class="text-center pt-3 movemenu text-danger plantilla">   
-             <h2><strong>Plantilla del </strong> </h2>     
-    </div>
+      </div>  
+      
+         <div class="text-center pt-3 movemenu text-danger plantilla">   
+             <h2><strong>Plantilla del <%= session.getAttribute("nombre")%> </strong></h2>     
+        </div> 
+    
       
     <div class="container  ">
      
         <div class="row justify-content-center mx-4 pt-3">
-           
-           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Portero&equipoId=${sessionScope.idEquipo}">Portero</a>
-           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Defensa&equipoId=3">Defensa</a>
-           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Centrocampista&equipoId=3">Centrocampista</a>
-           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Delantero&equipoId=3">Delantero</a>
-           
+           <% Equipo equipoSeleccionado = (Equipo) session.getAttribute("equiposelected"); %>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaequipo&equipo=<%=equipoSeleccionado.getId()%>&nombre=<%=equipoSeleccionado.getNombre()%>">Todos</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Portero&equipoId=<%= equipoSeleccionado.getId() %>">Porteros</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Defensa&equipoId=<%= equipoSeleccionado.getId() %>">Defensas</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Centrocampista&equipoId=<%= equipoSeleccionado.getId() %>">Centrocampistas</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Delantero&equipoId=<%= equipoSeleccionado.getId() %>">Delanteros</a>
         </div>
         
         <div class="row justify-content-center px-3 mt-5">
@@ -157,16 +160,6 @@
 
         </div>
 
-    <% if (jugadoresfiltrados != null) { %>
-  <h1>jugadoresfiltrados:</h1>
-  <ul>
-  <% for(Jugador jugador : jugadoresfiltrados){ %> 
-    <li><%= jugador.toString() %></li>
-  <% } %>
-  </ul>
-<% } else { %>
-  <p>jugadoresfiltrados is null</p>
-<% } %>
     </div>
 
     <div class="mt-4 ">
@@ -299,8 +292,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+        <script src="app.js"></script>
     <script type="text/JavaScript" src="vue.js"> </script>
     <script type="text/JavaScript" src="./my.js"> </script>
+    
     <script>
         const myApp = app.mount("#app");
         const myliga = liga.mount("#ligas");

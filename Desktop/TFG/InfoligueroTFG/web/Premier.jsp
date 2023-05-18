@@ -4,6 +4,7 @@
     Author     : Iván Juárez
 --%>
 
+<%@page import="entities.Equipop"%>
 <%@page import="entities.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,7 +26,7 @@
 
 <body class="fondo">
      <%
-       //  List<Equipo> equipos = (List<Equipo>) session.getAttribute("equipos");
+         List<Equipop> equipospremier = (List<Equipop>) session.getAttribute("equiposp");
          // List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
@@ -62,7 +63,7 @@
                     <a class="nav-link dropdown-toggle seleccionbutton" href="#" id="dropdownId" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Selecciona Liga</a>
                     <div id="ligas" class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item movediv" href="Controller?op=inicio">{{laliga}}</a>
+                        <a class="dropdown-item movediv" href="Controller?op=vaequipo&equipo=1">{{laliga}}</a>
                         <a class="dropdown-item movediv" href="#">{{premier}}</a>
                         <a class="dropdown-item movediv" href="#">{{serie}}</a>
                         <a class="dropdown-item movediv" href="#">{{bundesliga}} </a>
@@ -81,35 +82,12 @@
             </ul>
         </div>
     </nav>
-    <div class="bg-purple text-center">
-        
-             <!-- Esto nos lo hara un bucle que sacara las imagnenes de la bbdd -->
-    
-         <a href="" ><img src="Imagenes/181.png" class="" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        <a href=""><img src="Imagenes/181.png" alt=""></a>
-        
-        </form>
-       
-        
+    <div class="bg-purple text-center  justify-content-center row">
+  <% for(Equipop equipopremier : equipospremier){%>   
+         <a class="nav-link" class="active" href="Controller?op=vaequipopremier&equipo=<%=equipopremier.getId()%>"><img src="<%=equipopremier.getImagen()%>" alt=""></a>  
+     <%}%>      
     </div>
+    
     <div class="text-center pt-3 movemenu text-danger plantilla">
         <h2><strong>Plantilla del Mallorca</strong> </h2>
     </div>
