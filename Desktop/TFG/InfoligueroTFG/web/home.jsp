@@ -39,6 +39,7 @@
           List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
      
          // Equipo idequipo = (Equipo) session.getAttribute("idequipo");  //ver 
+        Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
          Usuario user = (Usuario) session.getAttribute("user");
         %>
     <nav class="navbar navbar-expand-sm navbar-dark bg-danger p-2 movemenu">
@@ -178,16 +179,41 @@
             </div>
             <div class="mt-3">
                 
-         <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz" >
-                    Quiz de la liga </button>
-                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalinfo">
+         <div class="row">
+                    <div class="col">
+                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">1</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=4"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">4</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=7"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">7</button></a>
+                    </div>
+                    <div class="col">
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=2"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">2</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=5"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">5</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=8"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">8</button></a>
+                     
+                    </div>
+                    <div class="col">
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=3"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">3</button></a>
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=6"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">6</button></a>
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=9"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">9</button></a>
+               
+                      </div>
+                  </div>
+
+                <button class=" rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalinfo">
                     Informacion Quiz</button>        
             </div>
 
         </div>
          <%}
             %>
-
+            
+            <% if (user!=null&&preguntaseleccionada!=null) {%>
+            <div class="d-flex justify-content-center mb-5 mr-4 ">
+                <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz">RESPONDER PREGUNTA</button>
+            </div>
+ <%}
+            %>
+            
         <footer class="bg-danger p-3 text-center text-white ">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>
         </footer>
@@ -228,9 +254,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     
-                    <h5 class="modal-title">La pregunta del dia: ¿Cual es el Primer nombre de Le Normand, Jugador de la Real Sociedad?</h5>
-                    
+                    <!-- <% // Pregunta pregunta = (Pregunta) session.getAttribute("preguntaseleccionada");%>
+               <h3><//%= pregunta.getTexto()%></h3> -->                    
+                 
                 </div>
+                
                 <form action="Controller?op=varespuesta" method="post">
                     <div class="modal-body d-flex">
                         <div class="flex-fill quizbutton">

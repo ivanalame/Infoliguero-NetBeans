@@ -3,6 +3,7 @@ package controller;
 import entities.Equipo;
 import entities.Equipop;
 import entities.Jugador;
+import entities.Jugadorp;
 import entities.Pregunta;
 import entities.Respuesta;
 import entities.Usuario;
@@ -55,7 +56,9 @@ public class Controller extends HttpServlet {
          List <Equipop> equipospremier;
           Usuario user = null;
           Equipo equiposelected;
+          Equipop equipopselected;
           List <Jugador> jugadores ;
+           List <Jugadorp> jugadoresp ;
            List <Pregunta> preguntas ;
            Pregunta preguntaselected;
             List <Respuesta> respuestas ;
@@ -74,6 +77,7 @@ public class Controller extends HttpServlet {
             session.setAttribute("equipos", equipos);        
             
             session.removeAttribute("jugadores");
+             session.removeAttribute("jugadoresfiltrados");
             
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else if (op.equals("vaequipo")) {
@@ -142,23 +146,28 @@ public class Controller extends HttpServlet {
              session.removeAttribute("user");
             //Recargamos la home.jsp
             request.getRequestDispatcher("home.jsp").forward(request, response);
-             }else if (op.equals("logoutpremier")) {
+         }else if (op.equals("logoutpremier")) {
             //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
              session.removeAttribute("user");
             //Recargamos la home.jsp
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
             
          } else if (op.equals("vapregunta")) {
-          
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-         
+           String idpregunta = request.getParameter("pregunta");
+           q = em.createQuery("SELECT p FROM Pregunta p WHERE p.id = :id");
+           q.setParameter("id", Integer.parseInt(idpregunta));
+            Pregunta preguntaseleccionada = (Pregunta)q.getSingleResult();
+             
+             session.setAttribute("preguntaseleccionada", preguntaseleccionada);
+             
+            request.getRequestDispatcher("home.jsp").forward(request, response);    
          } else if (op.equals("vapremier")) {
            q =  em.createNamedQuery("Equipop.findAll");   //me bajo todos los equipos
            equipospremier  = (List <Equipop>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
             session.setAttribute("equiposp", equipospremier);  
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
-          }else if (op.equals("loginpremier")) {
+         }else if (op.equals("loginpremier")) {
             
              String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
              String pass = request.getParameter("pass");
@@ -185,7 +194,22 @@ public class Controller extends HttpServlet {
             
              session.setAttribute("user", user);
              request.getRequestDispatcher("Premier.jsp").forward(request, response);
-          }
+          } else if (op.equals("vaequipopremier")) {
+            String idequipo = request.getParameter("equipo");
+            //lo busco en la bbdd
+            equipopselected = em.find(Equipop.class, Integer.parseInt(idequipo));
+            jugadoresp = equipopselected.getJugadorpList();
+            
+            session.setAttribute("jugadoresp", jugadoresp);
+            
+            session.setAttribute("equipopselected", equipopselected);  //ver
+            session.setAttribute("nombre", equipopselected.getNombre()); // agrego el nombre del equipo
+            
+              session.removeAttribute("jugadoresfiltrados");
+             
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+           
+        }
         
         
     }

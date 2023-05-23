@@ -4,6 +4,7 @@
     Author     : Iván Juárez
 --%>
 
+<%@page import="entities.Jugadorp"%>
 <%@page import="entities.Equipop"%>
 <%@page import="entities.Usuario"%>
 <%@page import="java.util.List"%>
@@ -27,7 +28,7 @@
 <body class="fondo">
      <%
          List<Equipop> equipospremier = (List<Equipop>) session.getAttribute("equiposp");
-         // List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
+          List<Jugadorp> jugadoresp = (List<Jugadorp>) session.getAttribute("jugadoresp");
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
      
@@ -96,23 +97,26 @@
 
         <div class="row justify-content-center px-3">
 
-            <div class="col-md-6 col-lg-4 p-3 movediv">
-                <div class="card h-100 colorborde">
-                    <div class="card-body ">
-                        <img src="Imagenes/db5201de-ca4e-4195-8c5b-796051a45611.jpg" class="float-left w-50" alt="">
+          <!-- <//% 
+               //for (Jugadorp jugador : jugadoresp){%>
+                <div class="col-md-6 col-lg-4 p-3 movediv">
+                 <div class="card h-100 colorborde">
+                   <div class="card-body ">
+                        <img src="<//%=jugador.getFoto()%>" class="float-left w-50" alt="">    
                         <div class="text-right">
-                            <h3 class="ml-">Nombre</h3>
-                            <h5>edad</h5>
-                            <h5>Posicion</h5>
-                            <p>Dorsal</p>
-                            <p>Fecha de nacimiento</p>
-                            <p>Pais</p>
+                            <h3 class="ml-"><//%=jugador.getNombre()%></h3>
+                            <h5> Edad: <//%=jugador.getEdad()%></h5>
+                            <h5><//%=jugador.getPosicion()%></h5>
+                            <p> Dorsal: <//%=jugador.getDorsal()%></p>
+                            <p><//%=jugador.getFechaNacimiento()%></p>
+                            <p><//%=jugador.getPais()%></p>
 
                         </div>
-                    </div>
                 </div>
             </div>
-
+            <%//}%>
+            
+-->
 
 
         </div>
