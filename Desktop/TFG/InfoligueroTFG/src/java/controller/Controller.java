@@ -159,6 +159,7 @@ public class Controller extends HttpServlet {
             Pregunta preguntaseleccionada = (Pregunta)q.getSingleResult();
              
              session.setAttribute("preguntaseleccionada", preguntaseleccionada);
+             session.setAttribute("respuestas", preguntaseleccionada.getRespuestaList());
              
             request.getRequestDispatcher("home.jsp").forward(request, response);    
          } else if (op.equals("vapremier")) {
@@ -209,6 +210,13 @@ public class Controller extends HttpServlet {
              
             request.getRequestDispatcher("home.jsp").forward(request, response);
            
+        }else if (op.equals("allrespuestas")) {
+            String idpregunta = request.getParameter("idpregunta"); 
+            preguntaselected = em.find(Pregunta.class, Integer.parseInt(idpregunta)); 
+            
+             session.setAttribute("respuestas", preguntaselected.getRespuestaList()); 
+             
+             request.getRequestDispatcher("respuesta.jsp").forward(request, response);
         }
         
         

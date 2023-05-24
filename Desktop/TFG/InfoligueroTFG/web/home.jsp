@@ -208,10 +208,15 @@
             %>
             
             <% if (user!=null&&preguntaseleccionada!=null) {%>
-            <div class="d-flex justify-content-center mb-5 mr-4 ">
-                <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz">RESPONDER PREGUNTA</button>
+            <div class="d-flex justify-content-center mb-5 mr-4 ">            
+               <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz" data-pregunta="<%=preguntaseleccionada.getTexto()%>" data-idpregunta="<%=preguntaseleccionada.getId()%>">RESPONDER PREGUNTA</button>
             </div>
  <%}
+            %>
+            
+            <% if (user!=null&&preguntaseleccionada!=null) {%>
+            <button><%=preguntaseleccionada.getTexto() %></button>
+             <%}
             %>
             
         <footer class="bg-danger p-3 text-center text-white ">
@@ -254,26 +259,17 @@
             <div class="modal-content">
                 <div class="modal-header">
                     
-                    <!-- <% // Pregunta pregunta = (Pregunta) session.getAttribute("preguntaseleccionada");%>
-               <h3><//%= pregunta.getTexto()%></h3> -->                    
+                    <h4>La pregunta es: </h4>                   
                  
                 </div>
                 
                 <form action="Controller?op=varespuesta" method="post">
-                    <div class="modal-body d-flex">
-                        <div class="flex-fill quizbutton">
-                            <button class="quizbutton" type="text">Robin</button>
-                            <button class="quizbutton" type="text">Olivier</button>
-                        </div>
-
+                    <div class="modal-body" id="respuesta">
+                        <%// for(Respuesta respuesta : respuestas){%>   
+                       <!-- <button class="quizbutton" type="text"><//%=respuesta.getTexto() %></button>l Quiz-->  
+                        <%//} %>
                     </div>
-                    <div class="modal-body d-flex">
-                        <div class="flex-fill  quizbutton">
-                            <button class="quizbutton" type="text">Unai</button>
-                            <button class="quizbutton" type="text">Mathieu</button>
-                        </div>
-                    </div>
-
+            
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success sendbutton">Enviar Respuesta</button>
                         <button type="button" class="btn cancelbutton" data-dismiss="modal">Cancelar</button>
@@ -323,7 +319,7 @@
         <script src="app.js"></script>
     <script type="text/JavaScript" src="vue.js"> </script>
     <script type="text/JavaScript" src="./my.js"> </script>
-    
+    <script src="myjs.js" type="text/javascript"></script>
     <script>
         const myApp = app.mount("#app");
         const myliga = liga.mount("#ligas");
