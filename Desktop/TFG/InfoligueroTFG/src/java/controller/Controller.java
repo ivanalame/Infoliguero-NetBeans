@@ -76,8 +76,9 @@ public class Controller extends HttpServlet {
            equipos  = (List <Equipo>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
             session.setAttribute("equipos", equipos);        
             
+            session.removeAttribute("nombre");
             session.removeAttribute("jugadores");
-             session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltrados");
             
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else if (op.equals("vaequipo")) {
@@ -159,13 +160,17 @@ public class Controller extends HttpServlet {
             Pregunta preguntaseleccionada = (Pregunta)q.getSingleResult();
              
              session.setAttribute("preguntaseleccionada", preguntaseleccionada);
-             session.setAttribute("respuestas", preguntaseleccionada.getRespuestaList());
+            
              
             request.getRequestDispatcher("home.jsp").forward(request, response);    
          } else if (op.equals("vapremier")) {
            q =  em.createNamedQuery("Equipop.findAll");   //me bajo todos los equipos
            equipospremier  = (List <Equipop>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
             session.setAttribute("equiposp", equipospremier);  
+            
+            session.removeAttribute("nombre");
+            session.removeAttribute("jugadores");
+            session.removeAttribute("jugadoresfiltrados");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
          }else if (op.equals("loginpremier")) {
@@ -208,15 +213,18 @@ public class Controller extends HttpServlet {
             
               session.removeAttribute("jugadoresfiltrados");
              
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher("Premier.jsp").forward(request, response);
+            
+            
            
         }else if (op.equals("allrespuestas")) {
-            String idpregunta = request.getParameter("idpregunta"); 
-            preguntaselected = em.find(Pregunta.class, Integer.parseInt(idpregunta)); 
+ 
+            String idpregunta = request.getParameter("idpregunta");         //esto es lo que mando desde el myjs
+            preguntaselected = em.find(Pregunta.class, Integer.parseInt(idpregunta));              //dentro del actor (Person) ya tengo la list de sus peliculas 
+                
+           session.setAttribute("respuestas", preguntaselected.getRespuestaList());     //le paso a la session la lista de peliculas bajo el nombre de movies y lo pintamos en otra jsp 
             
-             session.setAttribute("respuestas", preguntaselected.getRespuestaList()); 
-             
-             request.getRequestDispatcher("respuesta.jsp").forward(request, response);
+            request.getRequestDispatcher("respuesta.jsp").forward(request, response);
         }
         
         

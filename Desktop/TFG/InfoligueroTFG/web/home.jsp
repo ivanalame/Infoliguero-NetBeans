@@ -181,20 +181,20 @@
                 
          <div class="row">
                     <div class="col">
-                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">1</button></a>
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=4"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">4</button></a>
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=7"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">7</button></a>
+                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button class="rounded buttonquizandinfo">1</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=4"><button class="rounded buttonquizandinfo">4</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=7"><button class="rounded buttonquizandinfo">7</button></a>
                     </div>
                     <div class="col">
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=2"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">2</button></a>
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=5"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">5</button></a>
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=8"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">8</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=2"><button class="rounded buttonquizandinfo">2</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=5"><button class="rounded buttonquizandinfo">5</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=8"><button class="rounded buttonquizandinfo">8</button></a>
                      
                     </div>
                     <div class="col">
-                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=3"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">3</button></a>
-                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=6"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">6</button></a>
-                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=9"><button class="rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">9</button></a>
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=3"><button class="rounded buttonquizandinfo">3</button></a>
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=6"><button class="rounded buttonquizandinfo">6</button></a>
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=9"><button class="rounded buttonquizandinfo">9</button></a>
                
                       </div>
                   </div>
@@ -265,6 +265,8 @@
                 
                 <form action="Controller?op=varespuesta" method="post">
                     <div class="modal-body" id="respuesta">
+                        
+                        RESPUESTAS
                         <%// for(Respuesta respuesta : respuestas){%>   
                        <!-- <button class="quizbutton" type="text"><//%=respuesta.getTexto() %></button>l Quiz-->  
                         <%//} %>
@@ -314,7 +316,9 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
 
         <script src="app.js"></script>
     <script type="text/JavaScript" src="vue.js"> </script>
