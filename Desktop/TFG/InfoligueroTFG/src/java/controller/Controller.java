@@ -170,6 +170,8 @@ public class Controller extends HttpServlet {
             
             session.removeAttribute("nombre");
             session.removeAttribute("jugadores");
+            session.removeAttribute("jugadoresp");
+
             session.removeAttribute("jugadoresfiltrados");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
@@ -220,9 +222,9 @@ public class Controller extends HttpServlet {
         }else if (op.equals("allrespuestas")) {
  
             String idpregunta = request.getParameter("idpregunta");         //esto es lo que mando desde el myjs
-            preguntaselected = em.find(Pregunta.class, Integer.parseInt(idpregunta));              //dentro del actor (Person) ya tengo la list de sus peliculas 
+            preguntaselected = em.find(Pregunta.class, Integer.parseInt(idpregunta));              // 
                 
-           session.setAttribute("respuestas", preguntaselected.getRespuestaList());     //le paso a la session la lista de peliculas bajo el nombre de movies y lo pintamos en otra jsp 
+           session.setAttribute("respuestas", preguntaselected.getRespuestaList());     
             
             request.getRequestDispatcher("respuesta.jsp").forward(request, response);
         }

@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="modal-body d-flex">
                         <div class="flex-fill quizbutton">
-                            <button class="quizbutton" type="text"><%=respuesta.getTexto() %></button>
+                            <button class="quizbutton" type="text"><%=respuesta.getTexto()%></button>
                             <
                         </div>
 

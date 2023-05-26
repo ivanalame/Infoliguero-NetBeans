@@ -265,11 +265,7 @@
                 
                 <form action="Controller?op=varespuesta" method="post">
                     <div class="modal-body" id="respuesta">
-                        
-                        RESPUESTAS
-                        <%// for(Respuesta respuesta : respuestas){%>   
-                       <!-- <button class="quizbutton" type="text"><//%=respuesta.getTexto() %></button>l Quiz-->  
-                        <%//} %>
+                   
                     </div>
             
                     <div class="modal-footer">
@@ -314,10 +310,10 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   
     
 
         <script src="app.js"></script>
