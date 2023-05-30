@@ -18,6 +18,7 @@
 <html lang="en">
 
 <head>
+    
     <title>InfoLiguero</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -27,9 +28,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
    <!-- <link rel="stylesheet" href="info.css">-->
     <link href="info.css" rel="stylesheet" type="text/css"/>
+    
 </head>
 
 <body class="fondo">
+    
     
      <%
          List<Equipo> equipos = (List<Equipo>) session.getAttribute("equipos");
@@ -37,6 +40,7 @@
           List<Jugador> jugadoresfiltrados = (List<Jugador>) session.getAttribute("jugadoresfiltrados");
           List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
           List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
+           
      
          // Equipo idequipo = (Equipo) session.getAttribute("idequipo");  //ver 
         Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
@@ -72,9 +76,9 @@
                     <div id="ligas" class="dropdown-menu" aria-labelledby="dropdownId">
                         <a class="dropdown-item movediv" href="Controller?op=inicio">{{laliga}}</a>
                         <a class="dropdown-item movediv" href="Controller?op=vapremier">{{premier}}</a>
-                        <a class="dropdown-item movediv" href="#">{{serie}}</a>
-                        <a class="dropdown-item movediv" href="#">{{bundesliga}} </a>
-                        <a class="dropdown-item movediv" href="#">{{ligue}}</a>
+                        <a class="dropdown-item movediv" href="Controller?op=vaitalia">{{serie}}</a>
+                        <a class="dropdown-item movediv" href="Controller?op=vabundes">{{bundesliga}} </a>
+                        <a class="dropdown-item movediv" href="Controller?op=vafrancia">{{ligue}}</a>
                     </div>
                 </li>
                 <li class="ms-auto">
@@ -204,20 +208,15 @@
             </div>
 
         </div>
-         <%}
-            %>
+         <%}%>
             
             <% if (user!=null&&preguntaseleccionada!=null) {%>
             <div class="d-flex justify-content-center mb-5 mr-4 ">            
                <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz" data-pregunta="<%=preguntaseleccionada.getTexto()%>" data-idpregunta="<%=preguntaseleccionada.getId()%>">RESPONDER PREGUNTA</button>
             </div>
- <%}
-            %>
+             <%}%>
             
-            <% if (user!=null&&preguntaseleccionada!=null) {%>
-            <button><%=preguntaseleccionada.getTexto() %></button>
-             <%}
-            %>
+            
             
         <footer class="bg-danger p-3 text-center text-white ">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>
@@ -253,26 +252,26 @@
         </div>
     </div>
     <!-- Modal Quiz-->
-    <div class="modal fade" id="modalquiz" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+    <div class="modal fade " id="modalquiz" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
         aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog " role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-gris justify-content-center">
                     
                     <h4>La pregunta es: </h4>                   
                  
                 </div>
-                
-                <form action="Controller?op=varespuesta" method="post">
-                    <div class="modal-body" id="respuesta">
+                       
+                    <div class="modal-body quizbutton" id="respuesta">
                    
                     </div>
             
+                
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success sendbutton">Enviar Respuesta</button>
+                        <!--<button type="submit" class="btn btn-success sendbutton">Enviar Respuesta</button> --> 
                         <button type="button" class="btn cancelbutton" data-dismiss="modal">Cancelar</button>
                     </div>
-                </form>
+               
             </div>
         </div>
     </div>
@@ -310,6 +309,8 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+
      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -319,7 +320,9 @@
         <script src="app.js"></script>
     <script type="text/JavaScript" src="vue.js"> </script>
     <script type="text/JavaScript" src="./my.js"> </script>
+    
     <script src="myjs.js" type="text/javascript"></script>
+   
     <script>
         const myApp = app.mount("#app");
         const myliga = liga.mount("#ligas");

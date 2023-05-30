@@ -1,16 +1,15 @@
 <%-- 
-    Document   : PremierJSP
-    Created on : 15-may-2023, 15:53:07
+    Document   : francia
+    Created on : 30-may-2023, 12:15:43
     Author     : Iván Juárez
 --%>
 
-<%@page import="entities.Jugadorp"%>
-<%@page import="entities.Equipop"%>
-<%@page import="entities.Usuario"%>
+<%@page import="entities.Jugadorfr"%>
+<%@page import="entities.Equipofr"%>
 <%@page import="java.util.List"%>
+<%@page import="entities.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,15 +26,15 @@
 
 <body class="fondo">
      <%
-         List<Equipop> equipospremier = (List<Equipop>) session.getAttribute("equiposp");
-          List<Jugadorp> jugadoresp = (List<Jugadorp>) session.getAttribute("jugadoresp");
+         List<Equipofr> equiposfrancia = (List<Equipofr>) session.getAttribute("equiposfr");
+          List<Jugadorfr> jugadoresfr = (List<Jugadorfr>) session.getAttribute("jugadoresfr");
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
      
          Usuario user = (Usuario) session.getAttribute("user");
         %>
     
-    <nav class="navbar navbar-expand-sm navbar-dark bg-purple p-2 movemenu">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary p-2 movemenu">
         <a class="navbar-brand" href="#"><img src="img/logo.png" class="w-25" alt=""></a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +43,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="Controller?op=vapremier">Volver a la central <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="Controller?op=vafrancia">Volver a la central <span class="sr-only">(current)</span></a>
                 </li>
 
             </ul>
@@ -57,7 +56,7 @@
            
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li >
-                    <img src="img/dd-removebg-preview.png" alt="" class="w-50">
+                    <img src="img/ligue1.JPG" alt="" class="w-25">
                 </li>
                 
                 <li class="nav-item dropdown rounded-pill">
@@ -83,14 +82,14 @@
             </ul>
         </div>
     </nav>
-    <div class="bg-purple text-center  justify-content-center row">
-  <% for(Equipop equipopremier : equipospremier){%>   
-         <a class="nav-link" class="active" href="Controller?op=vaequipopremier&equipo=<%=equipopremier.getId()%>&nombre=<%=equipopremier.getNombre() %>"><img src="<%=equipopremier.getImagen()%>" alt=""></a>  
+    <div class="bg-primary text-center  justify-content-center row">
+  <% for(Equipofr equipofrancia : equiposfrancia){%>   
+         <a class="nav-link " class="active" href="Controller?op=vaequipofrancia&equipo=<%=equipofrancia.getId()%>&nombre=<%=equipofrancia.getNombre() %>"><img src="<%=equipofrancia.getImagen()%>" alt=""></a>  
      <%}%>      
     </div>
     
     <div class="text-center pt-3 movemenu text-danger plantilla">  
-        <% if (jugadoresp!=null) {%> 
+        <% if (jugadoresfr!=null) {%> 
               <h2><strong>Plantilla del <%= session.getAttribute("nombre")%> </strong></h2>  
         <%}%>      
                 
@@ -101,8 +100,8 @@
 
         <div class="row justify-content-center px-3">
 
-            <% if (jugadoresp!=null) {%>
-                 <%  for (Jugadorp jugador : jugadoresp){%>
+            <% if (jugadoresfr!=null) {%>
+                 <%  for (Jugadorfr jugador : jugadoresfr){%>
                 <div class="col-md-6 col-lg-4 p-3 movediv">
                  <div class="card h-100 colorborde">
                    <div class="card-body ">
@@ -152,7 +151,7 @@
           <%}
             %>
 
-        <footer class="bg-purple p-3 text-center text-white ">
+        <footer class="bg-primary p-3 text-center text-white ">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>
         </footer>
     </div>

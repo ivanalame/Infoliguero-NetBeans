@@ -16,13 +16,13 @@
         <div class="col-12">
         <div class="card p-2 h-100">
             <div class="row">
-                <div class="modal-body d-flex">
-                        <div class="flex-fill quizbutton">
+                <div class="modal-body d-flex justify-content-center">
+                    <form action="Controller?op=varespuesta&&respuesta=<%=respuesta.getId()%>" method="post">
+                        <div class="flex-fill ">
                             <button class="quizbutton" type="text"><%=respuesta.getTexto()%></button>
-                            <
                         </div>
-
-                    </div>
+                    </form>
+                   </div>
             </div>
         </div>
     </div>

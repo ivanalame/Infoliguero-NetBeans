@@ -9,6 +9,12 @@
     <class>entities.Pregunta</class>
     <class>entities.Equipop</class>
     <class>entities.Jugadorp</class>
+    <class>entities.Equipofr</class>
+    <class>entities.Equipobu</class>
+    <class>entities.Equipoit</class>
+    <class>entities.Jugadorit</class>
+    <class>entities.Jugadorbu</class>
+    <class>entities.Jugadorfr</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/infoliguero?zeroDateTimeBehavior=convertToNull"/>
