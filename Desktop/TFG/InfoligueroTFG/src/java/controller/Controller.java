@@ -116,6 +116,7 @@ public class Controller extends HttpServlet {
             
               session.removeAttribute("jugadoresfiltrados");
               session.removeAttribute("jugadoresfiltradosp");
+              session.removeAttribute("jugadoresfiltradosit");
              
             request.getRequestDispatcher("home.jsp").forward(request, response);
            
@@ -155,7 +156,24 @@ public class Controller extends HttpServlet {
 
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
               
+           } else if (op.equals("vaposicionit")) { 
+             List <Jugadorit> jugadoresfiltradosit ;
+             //posicion contiene Portero, por ejemplo
+            String posicion = request.getParameter("posicion");
+             String idequipo = request.getParameter("equipoId");
+             
+           q = em.createQuery("SELECT j FROM Jugadorit j WHERE j.posicion = :posicion AND j.idEquipo.id = :equipoId" , Jugadorit.class);          
             
+          
+            q.setParameter("posicion", posicion);
+            q.setParameter("equipoId", Integer.parseInt(idequipo));
+            jugadoresfiltradosit = (List <Jugadorit>)q.getResultList();   
+            
+            session.setAttribute("jugadoresfiltradosit", jugadoresfiltradosit);   
+            session.setAttribute("equipo", idequipo);
+
+            request.getRequestDispatcher("italia.jsp").forward(request, response);
+               
         } else if (op.equals("login")) {
             
              String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
@@ -233,6 +251,7 @@ public class Controller extends HttpServlet {
 
             session.removeAttribute("jugadoresfiltrados");
             session.removeAttribute("jugadoresfiltradosp");
+            session.removeAttribute("jugadoresfiltradosit");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
           } else if (op.equals("vaitalia")) {
@@ -249,6 +268,7 @@ public class Controller extends HttpServlet {
 
             session.removeAttribute("jugadoresfiltrados");
             session.removeAttribute("jugadoresfiltradosp");
+            session.removeAttribute("jugadoresfiltradosit");
              
             request.getRequestDispatcher("italia.jsp").forward(request, response);
           } else if (op.equals("vabundes")) {
@@ -422,6 +442,7 @@ public class Controller extends HttpServlet {
             session.setAttribute("nombre", equipoitselected.getNombre()); // agrego el nombre del equipo
             
               session.removeAttribute("jugadoresfiltrados");
+              session.removeAttribute("jugadoresfiltradosit");
              
             request.getRequestDispatcher("italia.jsp").forward(request, response);
            } else if (op.equals("vaequipobundes")) {
