@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="info.css">
+    <link rel="icon" href="img/favicon.jpg" type="image/x-icon">
 </head>
 
 <body class="fondo">
@@ -131,8 +132,8 @@
             <a class="twitter-timeline" data-lang="es" data-width="400" data-height="500" data-theme="dark" 
              href="https://twitter.com/ivanJua16758008?ref_src=twsrc%5Etfw">Tweets by ivanJua16758008</a> 
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
         </div>
+        
         <% if (user!=null) {%>
         <!-- Este Div solo aparecera si estas logeado -->
         <div class=" float-left  text-center ml-4 ">

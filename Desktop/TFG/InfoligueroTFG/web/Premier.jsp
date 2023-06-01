@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="info.css">
+    <link rel="icon" href="img/favicon.jpg" type="image/x-icon">
 </head>
 
 <body class="fondo">
@@ -30,6 +31,7 @@
          List<Equipop> equipospremier = (List<Equipop>) session.getAttribute("equiposp");
           List<Jugadorp> jugadoresp = (List<Jugadorp>) session.getAttribute("jugadoresp");
           List<Jugadorp> jugadoresfiltradosp = (List<Jugadorp>) session.getAttribute("jugadoresfiltradosp");
+          Equipop equipoSeleccionado = (Equipop) session.getAttribute("equipopselected"); 
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
      
@@ -101,7 +103,7 @@
  
         <div class="row justify-content-center mx-4 pt-3">
             <% if (jugadoresp!=null) {%>
-            <% Equipop equipoSeleccionado = (Equipop) session.getAttribute("equipopselected"); %>
+          
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaequipopremier&equipo=<%=equipoSeleccionado.getId()%>&nombre=<%=equipoSeleccionado.getNombre()%>">Todos</a>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicionp&posicion=Portero&equipoId=<%= equipoSeleccionado.getId() %>">Porteros</a>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicionp&posicion=Defensa&equipoId=<%= equipoSeleccionado.getId() %>">Defensas</a>
@@ -113,30 +115,47 @@
            
         <div class="row justify-content-center px-3">
 
-            <% if(jugadoresp!=null) {%>
-                 <%  for (Jugadorp jugador : jugadoresp){%>
-                <div class="col-md-6 col-lg-4 p-3 movediv">
-                 <div class="card h-100 colorborde">
-                   <div class="card-body ">
-                        <img src="<%=jugador.getFoto()%>" class="float-left w-50" alt="">    
-                        <div class="text-right">
-                            <h3 class="ml-"><%=jugador.getNombre()%></h3>
-                            <h5> Edad: <%=jugador.getEdad()%></h5>
-                            <h5><%=jugador.getPosicion()%></h5>
-                            <p> Dorsal: <%=jugador.getDorsal()%></p>
-                            <p><%=jugador.getFechaNacimiento()%></p>
-                            <p><%=jugador.getPais()%></p>
-
-                        </div>
-                  </div>
-                </div>
+       <% if (equipoSeleccionado != null) { %>
+    <% if (jugadoresfiltradosp != null) { %>
+      <% for (Jugadorp jugador : jugadoresfiltradosp) { %>
+        <div class="col-md-6 col-lg-4 p-3 movediv">
+          <div class="card h-100 colorborde">
+            <div class="card-body">
+              <img src="<%=jugador.getFoto()%>" class="float-left w-50" alt="">
+              <div class="text-right">
+                <h3 class="ml-"><%=jugador.getNombre()%></h3>
+                <h5>Edad: <%=jugador.getEdad()%></h5>
+                <h5><%=jugador.getPosicion()%></h5>
+                <p>Dorsal: <%=jugador.getDorsal()%></p>
+                <p><%=jugador.getFechaNacimiento()%></p>
+                <p><%=jugador.getPais()%></p>
+              </div>
             </div>
-             <%}%>
-               
-            <%}%>
-         
-
-    </div>
+          </div>
+        </div>
+      <% } %>
+    <% } else if (jugadoresp != null) { %>
+      <% for (Jugadorp jugador : jugadoresp) { %>
+        <div class="col-md-6 col-lg-4 p-3 movediv">
+          <div class="card h-100 colorborde">
+            <div class="card-body">
+              <img src="<%=jugador.getFoto()%>" class="float-left w-50" alt="">
+              <div class="text-right">
+                <h3 class="ml-"><%=jugador.getNombre()%></h3>
+                <h5>Edad: <%=jugador.getEdad()%></h5>
+                <h5><%=jugador.getPosicion()%></h5>
+                <p>Dorsal: <%=jugador.getDorsal()%></p>
+                <p><%=jugador.getFechaNacimiento()%></p>
+                <p><%=jugador.getPais()%></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } %>
+     <% } %>
+     <% } %>
+    
+        </div>
 
     <div class="mt-4 ">
         <div class=" float-right mb-5 mr-4 ">

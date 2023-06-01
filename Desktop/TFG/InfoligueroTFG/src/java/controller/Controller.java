@@ -99,6 +99,8 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadores");
             session.removeAttribute("jugadoresfiltrados");
             
+            session.removeAttribute("jugadoresfiltradosp");
+            
             
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else if (op.equals("vaequipo")) {
@@ -141,7 +143,7 @@ public class Controller extends HttpServlet {
             String posicion = request.getParameter("posicion");
              String idequipo = request.getParameter("equipoId");
              
-           q = em.createQuery("SELECT j FROM Jugadorp j WHERE j.posicion = :posicion AND j.idEquipo.id = :equipoId");          
+           q = em.createQuery("SELECT j FROM Jugadorp j WHERE j.posicion = :posicion AND j.idEquipo.id = :equipoId" , Jugadorp.class);          
             
           
             q.setParameter("posicion", posicion);
@@ -222,11 +224,15 @@ public class Controller extends HttpServlet {
            equipospremier  = (List <Equipop>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
             session.setAttribute("equiposp", equipospremier);  
             
-            session.removeAttribute("nombre");
+             session.removeAttribute("nombre");
             session.removeAttribute("jugadores");
             session.removeAttribute("jugadoresp");
+            session.removeAttribute("jugadoresit");
+            session.removeAttribute("jugadoresbu");
+             session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosp");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
           } else if (op.equals("vaitalia")) {
@@ -237,8 +243,12 @@ public class Controller extends HttpServlet {
             session.removeAttribute("nombre");
             session.removeAttribute("jugadores");
             session.removeAttribute("jugadoresp");
+            session.removeAttribute("jugadoresit");
+            session.removeAttribute("jugadoresbu");
+             session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosp");
              
             request.getRequestDispatcher("italia.jsp").forward(request, response);
           } else if (op.equals("vabundes")) {
@@ -254,6 +264,7 @@ public class Controller extends HttpServlet {
              session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosp");
              
             request.getRequestDispatcher("bundes.jsp").forward(request, response);
           } else if (op.equals("vafrancia")) {
@@ -269,6 +280,7 @@ public class Controller extends HttpServlet {
              session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosp");
              
             request.getRequestDispatcher("francia.jsp").forward(request, response);
            

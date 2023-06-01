@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
    <!-- <link rel="stylesheet" href="info.css">-->
     <link href="info.css" rel="stylesheet" type="text/css"/>
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.jpg" type="image/x-icon">
     
 </head>
 
