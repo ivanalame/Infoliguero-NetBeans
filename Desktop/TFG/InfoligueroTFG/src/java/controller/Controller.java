@@ -173,6 +173,42 @@ public class Controller extends HttpServlet {
             session.setAttribute("equipo", idequipo);
 
             request.getRequestDispatcher("italia.jsp").forward(request, response);
+            
+           } else if (op.equals("vaposicionbu")) { 
+             List <Jugadorbu> jugadoresfiltradosbu ;
+             //posicion contiene Portero, por ejemplo
+            String posicion = request.getParameter("posicion");
+             String idequipo = request.getParameter("equipoId");
+             
+           q = em.createQuery("SELECT j FROM Jugadorbu j WHERE j.posicion = :posicion AND j.idEquipo.id = :equipoId" , Jugadorbu.class);          
+            
+          
+            q.setParameter("posicion", posicion);
+            q.setParameter("equipoId", Integer.parseInt(idequipo));
+            jugadoresfiltradosbu = (List <Jugadorbu>)q.getResultList();   
+            
+            session.setAttribute("jugadoresfiltradosbu", jugadoresfiltradosbu);   
+            session.setAttribute("equipo", idequipo);
+
+            request.getRequestDispatcher("bundes.jsp").forward(request, response);
+            
+            } else if (op.equals("vaposicionfr")) { 
+             List <Jugadorfr> jugadoresfiltradosfr ;
+             //posicion contiene Portero, por ejemplo
+            String posicion = request.getParameter("posicion");
+             String idequipo = request.getParameter("equipoId");
+             
+           q = em.createQuery("SELECT j FROM Jugadorfr j WHERE j.posicion = :posicion AND j.idEquipo.id = :equipoId" , Jugadorfr.class);          
+            
+          
+            q.setParameter("posicion", posicion);
+            q.setParameter("equipoId", Integer.parseInt(idequipo));
+            jugadoresfiltradosfr = (List <Jugadorfr>)q.getResultList();   
+            
+            session.setAttribute("jugadoresfiltradosfr", jugadoresfiltradosfr);   
+            session.setAttribute("equipo", idequipo);
+
+            request.getRequestDispatcher("francia.jsp").forward(request, response);
                
         } else if (op.equals("login")) {
             
@@ -247,11 +283,13 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresp");
             session.removeAttribute("jugadoresit");
             session.removeAttribute("jugadoresbu");
-             session.removeAttribute("jugadoresfr");
+            session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
             session.removeAttribute("jugadoresfiltradosp");
             session.removeAttribute("jugadoresfiltradosit");
+            session.removeAttribute("jugadoresfiltradosbu");
+            session.removeAttribute("jugadoresfiltradosfr");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
           } else if (op.equals("vaitalia")) {
@@ -264,11 +302,13 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresp");
             session.removeAttribute("jugadoresit");
             session.removeAttribute("jugadoresbu");
-             session.removeAttribute("jugadoresfr");
+            session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
             session.removeAttribute("jugadoresfiltradosp");
             session.removeAttribute("jugadoresfiltradosit");
+            session.removeAttribute("jugadoresfiltradosbu");
+            session.removeAttribute("jugadoresfiltradosfr");
              
             request.getRequestDispatcher("italia.jsp").forward(request, response);
           } else if (op.equals("vabundes")) {
@@ -281,10 +321,13 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresp");
             session.removeAttribute("jugadoresit");
             session.removeAttribute("jugadoresbu");
-             session.removeAttribute("jugadoresfr");
+            session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
             session.removeAttribute("jugadoresfiltradosp");
+            session.removeAttribute("jugadoresfiltradosit");
+            session.removeAttribute("jugadoresfiltradosbu");
+            session.removeAttribute("jugadoresfiltradosfr");
              
             request.getRequestDispatcher("bundes.jsp").forward(request, response);
           } else if (op.equals("vafrancia")) {
@@ -297,10 +340,14 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresp");
             session.removeAttribute("jugadoresit");
             session.removeAttribute("jugadoresbu");
-             session.removeAttribute("jugadoresfr");
+            session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
             session.removeAttribute("jugadoresfiltradosp");
+            session.removeAttribute("jugadoresfiltradosit");
+            session.removeAttribute("jugadoresfiltradosbu");
+            session.removeAttribute("jugadoresfiltradosfr");
+        
              
             request.getRequestDispatcher("francia.jsp").forward(request, response);
            
@@ -456,7 +503,8 @@ public class Controller extends HttpServlet {
             session.setAttribute("equipobuselected", equipobuselected);  //ver
             session.setAttribute("nombre", equipobuselected.getNombre()); // agrego el nombre del equipo
             
-              session.removeAttribute("jugadoresfiltrados");
+             session.removeAttribute("jugadoresfiltrados");
+             session.removeAttribute("jugadoresfiltradosbu");
              
             request.getRequestDispatcher("bundes.jsp").forward(request, response);  
            } else if (op.equals("vaequipofrancia")) {
@@ -470,7 +518,8 @@ public class Controller extends HttpServlet {
             session.setAttribute("equipofrselected", equipofrselected);  //ver
             session.setAttribute("nombre", equipofrselected.getNombre()); // agrego el nombre del equipo
             
-              session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosfr");
              
             request.getRequestDispatcher("francia.jsp").forward(request, response);     
            
