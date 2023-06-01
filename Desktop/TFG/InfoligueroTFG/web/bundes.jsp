@@ -72,7 +72,7 @@
                 </li>
                <li class="ms-auto pl-5">
                      <% if (user!=null) {%>
-                     <h5 class="text-white">Bienvenido <%=user.getNick()%> </h5><a href="Controller?op=logoutpremier"><button class="cancelbutton ml-3">Logout</button></a>
+                     <h5 class="text-white">Bienvenido <%=user.getNick()%> </h5><a href="Controller?op=logoutbundes"><button class="cancelbutton ml-3">Logout</button></a>
                     <%} else {%>
                     <button class="loginbutton " data-toggle="modal" data-target="#modallogin">
                         Login <img src="" alt="" class="w-25 pl-1"></button>
@@ -165,13 +165,13 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Login & Register</h5>
                 </div>
-                <form action="Controller?op=loginpremier" method="post">
+                <form action="Controller?op=loginbundes" method="post">
                     <div class="modal-body text-center">
                         <p>
                             <input type="text" name="nick" id="" placeholder="Usuario">
                         </p>
                         <p>
-                            <input type="text" name="pass" id="" placeholder="Contraseña">
+                            <input type="password" name="pass" id="" placeholder="Contraseña">
                         </p>
 
 

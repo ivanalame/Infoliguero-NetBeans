@@ -29,6 +29,7 @@
      <%
          List<Equipop> equipospremier = (List<Equipop>) session.getAttribute("equiposp");
           List<Jugadorp> jugadoresp = (List<Jugadorp>) session.getAttribute("jugadoresp");
+          List<Jugadorp> jugadoresfiltradosp = (List<Jugadorp>) session.getAttribute("jugadoresfiltradosp");
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
      
@@ -98,10 +99,21 @@
     </div>
     <div class="container">
  
-
+        <div class="row justify-content-center mx-4 pt-3">
+            <% if (jugadoresp!=null) {%>
+            <% Equipop equipoSeleccionado = (Equipop) session.getAttribute("equipopselected"); %>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaequipopremier&equipo=<%=equipoSeleccionado.getId()%>&nombre=<%=equipoSeleccionado.getNombre()%>">Todos</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicionp&posicion=Portero&equipoId=<%= equipoSeleccionado.getId() %>">Porteros</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicionp&posicion=Defensa&equipoId=<%= equipoSeleccionado.getId() %>">Defensas</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicionp&posicion=Centrocampista&equipoId=<%= equipoSeleccionado.getId() %>">Centrocampistas</a>
+           <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicionp&posicion=Delantero&equipoId=<%= equipoSeleccionado.getId() %>">Delanteros</a>
+          <%}%>  
+           
+        </div>
+           
         <div class="row justify-content-center px-3">
 
-            <% if (jugadoresp!=null) {%>
+            <% if(jugadoresp!=null) {%>
                  <%  for (Jugadorp jugador : jugadoresp){%>
                 <div class="col-md-6 col-lg-4 p-3 movediv">
                  <div class="card h-100 colorborde">
@@ -122,8 +134,7 @@
              <%}%>
                
             <%}%>
-           
-       
+         
 
     </div>
 
@@ -172,7 +183,7 @@
                             <input type="text" name="nick" id="" placeholder="Usuario">
                         </p>
                         <p>
-                            <input type="text" name="pass" id="" placeholder="Contraseña">
+                            <input type="password" name="pass" id="" placeholder="Contraseña">
                         </p>
 
 

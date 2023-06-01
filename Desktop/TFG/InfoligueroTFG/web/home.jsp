@@ -238,7 +238,7 @@
                             <input type="text" name="nick" id="" placeholder="Usuario">
                         </p>
                         <p>
-                            <input type="text" name="pass" id="" placeholder="Contraseña">
+                            <input type="password" name="pass" id="" placeholder="Contraseña">
                         </p>
 
 

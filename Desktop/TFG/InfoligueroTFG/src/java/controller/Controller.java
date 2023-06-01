@@ -113,6 +113,7 @@ public class Controller extends HttpServlet {
             session.setAttribute("nombre", equiposelected.getNombre()); // agrego el nombre del equipo
             
               session.removeAttribute("jugadoresfiltrados");
+              session.removeAttribute("jugadoresfiltradosp");
              
             request.getRequestDispatcher("home.jsp").forward(request, response);
            
@@ -135,7 +136,7 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("home.jsp").forward(request, response);
             
             } else if (op.equals("vaposicionp")) { 
-             List <Jugadorp> jugadoresfiltrados ;
+             List <Jugadorp> jugadoresfiltradosp ;
              //posicion contiene Portero, por ejemplo
             String posicion = request.getParameter("posicion");
              String idequipo = request.getParameter("equipoId");
@@ -145,9 +146,9 @@ public class Controller extends HttpServlet {
           
             q.setParameter("posicion", posicion);
             q.setParameter("equipoId", Integer.parseInt(idequipo));
-            jugadoresfiltrados = (List <Jugadorp>)q.getResultList();   
+            jugadoresfiltradosp = (List <Jugadorp>)q.getResultList();   
             
-            session.setAttribute("jugadoresfiltrados", jugadoresfiltrados);   
+            session.setAttribute("jugadoresfiltradosp", jugadoresfiltradosp);   
             session.setAttribute("equipo", idequipo);
 
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
@@ -190,7 +191,22 @@ public class Controller extends HttpServlet {
              session.removeAttribute("user");
             //Recargamos la home.jsp
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
+         }else if (op.equals("logoutitalia")) {
+            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
+             session.removeAttribute("user");
+            //Recargamos la home.jsp
+            request.getRequestDispatcher("italia.jsp").forward(request, response);
+         }else if (op.equals("logoutbundes")) {
+            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
+             session.removeAttribute("user");
+            //Recargamos la home.jsp
+            request.getRequestDispatcher("bundes.jsp").forward(request, response);
             
+         }else if (op.equals("logoutfrancia")) {
+            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
+             session.removeAttribute("user");
+            //Recargamos la home.jsp
+            request.getRequestDispatcher("francia.jsp").forward(request, response);
          } else if (op.equals("vapregunta")) {
            String idpregunta = request.getParameter("pregunta");
            q = em.createQuery("SELECT p FROM Pregunta p WHERE p.id = :id");
@@ -248,10 +264,14 @@ public class Controller extends HttpServlet {
             session.removeAttribute("nombre");
             session.removeAttribute("jugadores");
             session.removeAttribute("jugadoresp");
+            session.removeAttribute("jugadoresit");
+            session.removeAttribute("jugadoresbu");
+             session.removeAttribute("jugadoresfr");
 
             session.removeAttribute("jugadoresfiltrados");
              
             request.getRequestDispatcher("francia.jsp").forward(request, response);
+           
          }else if (op.equals("loginpremier")) {
             
              String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
@@ -279,6 +299,89 @@ public class Controller extends HttpServlet {
             
              session.setAttribute("user", user);
              request.getRequestDispatcher("Premier.jsp").forward(request, response);
+             }else if (op.equals("loginitalia")) {
+            
+             String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
+             String pass = request.getParameter("pass");
+             
+             q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = '"+nick+"' and u.pass ='"+pass+"'");
+              try {
+                user = (Usuario) q.getSingleResult();
+            } catch (NoResultException e) {
+            }
+                     
+           
+            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+                  user = new Usuario(1);
+                  user.setNick(nick);
+ 		  user.setPass(pass);
+                
+                //con estas lineas hacemos el insert, para inserta el dato en la base de datos 
+                  t = em.getTransaction(); //lo inserto en la  base de datos
+                  t.begin();
+                  em.persist(user);          
+                  t.commit();       
+            }      
+            
+            
+             session.setAttribute("user", user);
+             request.getRequestDispatcher("italia.jsp").forward(request, response);
+           
+          }else if (op.equals("loginbundes")) {
+            
+             String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
+             String pass = request.getParameter("pass");
+             
+             q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = '"+nick+"' and u.pass ='"+pass+"'");
+              try {
+                user = (Usuario) q.getSingleResult();
+            } catch (NoResultException e) {
+            }
+                     
+           
+            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+                  user = new Usuario(1);
+                  user.setNick(nick);
+ 		  user.setPass(pass);
+                
+                //con estas lineas hacemos el insert, para inserta el dato en la base de datos 
+                  t = em.getTransaction(); //lo inserto en la  base de datos
+                  t.begin();
+                  em.persist(user);          
+                  t.commit();       
+            }      
+            
+            
+             session.setAttribute("user", user);
+             request.getRequestDispatcher("bundes.jsp").forward(request, response);
+             
+          }else if (op.equals("loginfrancia")) {
+            
+             String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
+             String pass = request.getParameter("pass");
+             
+             q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = '"+nick+"' and u.pass ='"+pass+"'");
+              try {
+                user = (Usuario) q.getSingleResult();
+            } catch (NoResultException e) {
+            }
+                     
+           
+            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+                  user = new Usuario(1);
+                  user.setNick(nick);
+ 		  user.setPass(pass);
+                
+                //con estas lineas hacemos el insert, para inserta el dato en la base de datos 
+                  t = em.getTransaction(); //lo inserto en la  base de datos
+                  t.begin();
+                  em.persist(user);          
+                  t.commit();       
+            }      
+            
+            
+             session.setAttribute("user", user);
+             request.getRequestDispatcher("francia.jsp").forward(request, response);
           } else if (op.equals("vaequipopremier")) {
             String idequipo = request.getParameter("equipo");
             //lo busco en la bbdd
@@ -291,6 +394,7 @@ public class Controller extends HttpServlet {
             session.setAttribute("nombre", equipopselected.getNombre()); // agrego el nombre del equipo
             
               session.removeAttribute("jugadoresfiltrados");
+              session.removeAttribute("jugadoresfiltradosp");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
             
