@@ -14,6 +14,26 @@
     overflow-x: hidden;
     
 }
+.respuesta {
+  background-color: rgba(0,0,0,0); /* Fondo transparente */
+    padding: 20px; /* Añade un padding para tener un espacio en el interior del div */
+    position: relative; /* Establece la posición del div */
+    animation-name: animacion; /* Nombre de la animación */
+    animation-duration: 5s; /* Establece la duración de la animación a 5 segundos */
+    animation-iteration-count: infinite; /* Hace que la animación se repita infinitamente */
+    animation-direction: alternate; /* Hace que la animación se ejecute en ambas direcciones */
+    color: #fff; /* Cambia el color del texto a blanco */
+  }
+
+  @keyframes animacion {
+    0% {
+      left: -50%; /* Establece la posición inicial del div */
+    }
+    
+    100% {
+      left: 50%; /* Establece la posición final del div */
+    }
+  }
 .bg-purple{
   background-color: purple;
 }

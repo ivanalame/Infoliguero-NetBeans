@@ -80,7 +80,8 @@ public class Controller extends HttpServlet {
            
           List <Pregunta> preguntas ;
           Pregunta preguntaselected;
-          List <Respuesta> respuestas ;
+          List <Respuesta> respuestas; 
+           Respuesta respuestaselected;
           EntityTransaction t;
          
         EntityManager em = (EntityManager) session.getAttribute("em");
@@ -101,6 +102,8 @@ public class Controller extends HttpServlet {
             
             session.removeAttribute("jugadoresfiltradosp");
             
+            session.removeAttribute("escorrecta");
+            
             
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else if (op.equals("vaequipo")) {
@@ -117,6 +120,7 @@ public class Controller extends HttpServlet {
               session.removeAttribute("jugadoresfiltrados");
               session.removeAttribute("jugadoresfiltradosp");
               session.removeAttribute("jugadoresfiltradosit");
+              session.removeAttribute("escorrecta");
              
             request.getRequestDispatcher("home.jsp").forward(request, response);
            
@@ -135,6 +139,7 @@ public class Controller extends HttpServlet {
             
             session.setAttribute("jugadoresfiltrados", jugadoresfiltrados);   
             session.setAttribute("equipo", idequipo);
+            session.removeAttribute("escorrecta");
 
             request.getRequestDispatcher("home.jsp").forward(request, response);
             
@@ -271,7 +276,7 @@ public class Controller extends HttpServlet {
              
              session.setAttribute("preguntaseleccionada", preguntaseleccionada);
             
-             
+             session.removeAttribute("escorrecta");
             request.getRequestDispatcher("home.jsp").forward(request, response);    
          } else if (op.equals("vapremier")) {
            q =  em.createNamedQuery("Equipop.findAll");   //me bajo todos los equipos
@@ -532,8 +537,17 @@ public class Controller extends HttpServlet {
              
             
             request.getRequestDispatcher("respuesta.jsp").forward(request, response);
-        }
         
+        }else if (op.equals("varespuesta")) {
+ 
+            String idrespuesta = request.getParameter("respuesta");         //esto es lo que mando desde el myjs
+            respuestaselected = em.find(Respuesta.class, Integer.parseInt(idrespuesta));        
+                
+           session.setAttribute("escorrecta", respuestaselected);
+
+            
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        }
         
     }
 

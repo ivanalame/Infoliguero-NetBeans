@@ -46,6 +46,7 @@
      
          // Equipo idequipo = (Equipo) session.getAttribute("idequipo");  //ver 
         Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
+         Respuesta escorrecta = (Respuesta) session.getAttribute("escorrecta"); 
          Usuario user = (Usuario) session.getAttribute("user");
         %>
     <nav class="navbar navbar-expand-sm navbar-dark bg-danger p-2 movemenu">
@@ -120,9 +121,23 @@
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Delantero&equipoId=<%= equipoSeleccionado.getId() %>">Delanteros</a>
         </div>
         
+         <% if (escorrecta != null) {%>
+            <div class="row justify-content-center mx-4 mt-3  respuesta ">
+                <% if (escorrecta.getCorrecta()) { %>     
+                       
+                    <img src="img/7efs.gif" alt="" class="w-25">    
+                <% } else { %>       
+                    <img src="img/giphy.gif" alt="" class="w-25">
+                <% } %>
+            </div>
+                   
+            <% } %>
+
+        
+
         <div class="row justify-content-center px-3 mt-5">
           
-            
+    
 <%      
     if (jugadoresfiltrados == null) {
             for(Jugador jugador : jugadores){%>   
@@ -187,7 +202,7 @@
                 
          <div class="row">
                     <div class="col">
-                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button class="rounded buttonquizandinfo">1</button></a>
+                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button  id="boton1" onclick="disableButton();" class="rounded buttonquizandinfo">1</button>
                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=4"><button class="rounded buttonquizandinfo">4</button></a>
                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=7"><button class="rounded buttonquizandinfo">7</button></a>
                     </div>
@@ -289,16 +304,24 @@
                 <form action="Controller?op=login" method="post">
                     <div class="modal-body">
                         <p>
-                            El quiz consiste en adivinar correctamente la pregunta del dia.
+                            El quiz consiste en adivinar el maximo numero de preguntas.
                         </p>
                         <p>
-                            Si logras contestar correctamente la pregunta, al dia siguiente podras volver a hacer el
-                            reto de contestar correctamente otra pregunta.
+                            Las preguntas seran renovadas cada semana.
+                          </p>
+                          <p>
+                            Si aciertas aparecera un tick y si fallas una X.
                         </p>
                         <p>
-                            Si de lo contrario fallas la pregunta, no podras responder la pregunta del siguiente dia,
-                            tendras que esperar 24h.
+                            -Si aciertas menos  de 5 tendrás que seguir estudiando
                         </p>
+                        <p>
+                            -Si aciertas mas de 5 estas aprobado
+                        </p>
+                        <p>
+                            -Si aciertas mas de 8 eres un experto               
+                        </p>
+                        
 
 
                     </div>
@@ -324,7 +347,8 @@
     <script type="text/JavaScript" src="./my.js"> </script>
     
     <script src="myjs.js" type="text/javascript"></script>
-   
+    <script src="button.js" type="text/javascript"></script>
+    
     <script>
         const myApp = app.mount("#app");
         const myliga = liga.mount("#ligas");
