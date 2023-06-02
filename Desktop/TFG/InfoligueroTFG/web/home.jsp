@@ -202,7 +202,7 @@
                 
          <div class="row">
                     <div class="col">
-                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button  id="boton1" onclick="disableButton();" class="rounded buttonquizandinfo">1</button>
+                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button  id="boton1" onclick="desactivarBoton()" class="rounded buttonquizandinfo">1</button>
                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=4"><button class="rounded buttonquizandinfo">4</button></a>
                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=7"><button class="rounded buttonquizandinfo">7</button></a>
                     </div>
@@ -347,8 +347,9 @@
     <script type="text/JavaScript" src="./my.js"> </script>
     
     <script src="myjs.js" type="text/javascript"></script>
+   
+    <script type="text/javascript" src="button.js"></script>
     <script src="button.js" type="text/javascript"></script>
-    
     <script>
         const myApp = app.mount("#app");
         const myliga = liga.mount("#ligas");

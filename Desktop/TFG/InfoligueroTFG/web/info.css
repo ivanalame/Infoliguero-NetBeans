@@ -300,6 +300,9 @@ footer{
   -webkit-user-select: none;
   touch-action: manipulation;
 }
+.disabled {
+    opacity: 0.5;
+}
 
 .buttonquizandinfo:before {
   content: "";

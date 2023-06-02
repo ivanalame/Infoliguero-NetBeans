@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 function init(){
    onshowpregunta();
- 
+
 }
 
 function onshowpregunta() { 
@@ -16,7 +16,7 @@ function onshowpregunta() {
     var idpregunta = button.data('idpregunta');
     var modal = $(this);
     modal.find('h4').text(pregunta);
-    //AQUI LLAMOS A AJAX
+    //AQUI LLAMO A AJAX
     $.ajax({
       type: "GET",
       url: "Controller?op=allrespuestas&idpregunta="+idpregunta, //le paso las peliculas y el idactor que me traje antes 

@@ -4,6 +4,8 @@
     Author     : Iván Juárez
 --%>
 
+<%@page import="entities.Respuesta"%>
+<%@page import="entities.Pregunta"%>
 <%@page import="entities.Jugadorp"%>
 <%@page import="entities.Equipop"%>
 <%@page import="entities.Usuario"%>
@@ -34,6 +36,8 @@
           Equipop equipoSeleccionado = (Equipop) session.getAttribute("equipopselected"); 
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
+          Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
+         Respuesta escorrecta = (Respuesta) session.getAttribute("escorrecta"); 
      
          Usuario user = (Usuario) session.getAttribute("user");
         %>
@@ -164,7 +168,7 @@
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         </div>
-        <% if (user!=null) {%>
+             <% if (user!=null) {%>
         <!-- Este Div solo aparecera si estas logeado -->
         <div class=" float-left  text-center ml-4 ">
             <h2 class="plantilla"> <strong>¡Atrevete con el quiz!</strong></h2>
@@ -172,15 +176,40 @@
             
             </div>
             <div class="mt-3">
-                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">
-                    Quiz Premier League </button>
-                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalinfo">
-                    Informacion Quiz</button>
+                
+         <div class="row">
+                    <div class="col disabled">
+                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button  id="boton1" onclick="desactivarBoton()" class="rounded buttonquizandinfo">1</button>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=4"><button class="rounded buttonquizandinfo">4</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=7"><button class="rounded buttonquizandinfo">7</button></a>
+                    </div>
+                    <div class="col disabled">
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=2"><button class="rounded buttonquizandinfo">2</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=5"><button class="rounded buttonquizandinfo">5</button></a>
+                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=8"><button class="rounded buttonquizandinfo">8</button></a>
+                     
+                    </div>
+                    <div class="col disabled">
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=3"><button class="rounded buttonquizandinfo">3</button></a>
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=6"><button class="rounded buttonquizandinfo">6</button></a>
+                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=9"><button class="rounded buttonquizandinfo">9</button></a>
+               
+                      </div>
+                  </div>
+
+                <button class=" rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalinfo">
+                    Informacion Quiz</button>        
             </div>
 
         </div>
-          <%}
-            %>
+         <%}%>
+            
+            <% if (user!=null&&escorrecta!=null) {%>
+            <div class="d-flex justify-content-center mb-5 mr-4 ">            
+               <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz" data-pregunta="<%=preguntaseleccionada.getTexto()%>" data-idpregunta="<%=preguntaseleccionada.getId()%>">RESPONDER PREGUNTA</button>
+            </div>
+             <%}%>
+            
 
         <footer class="bg-purple p-3 text-center text-white ">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>
@@ -216,39 +245,30 @@
         </div>
     </div>
     <!-- Modal Quiz-->
-    <div class="modal fade" id="modalquiz" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+    <div class="modal fade " id="modalquiz" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
         aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog " role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">La pregunta del dia: ¿Cual es el Primer nombre de Le Normand, Jugador de la
-                        Real Sociedad?</h5>
+                <div class="modal-header bg-gris justify-content-center">
+                    
+                    <h4>La pregunta es: </h4>                   
+                 
                 </div>
-                <form action="Controller?op=varespuesta" method="post">
-                    <div class="modal-body d-flex">
-                        <div class="flex-fill quizbutton">
-                            <button class="quizbutton" type="submit">Robin</button>
-                            <button class="quizbutton" type="submit">Olivier</button>
-                        </div>
-
+                       
+                    <div class="modal-body quizbutton" id="respuesta">
+                   
                     </div>
-                    <div class="modal-body d-flex">
-                        <div class="flex-fill  quizbutton">
-                            <button class="quizbutton" type="submit">Unai</button>
-                            <button class="quizbutton" type="submit">Mathieu</button>
-                        </div>
-                    </div>
-
+            
+                
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success sendbutton">Enviar Respuesta</button>
+                        <!--<button type="submit" class="btn btn-success sendbutton">Enviar Respuesta</button> --> 
                         <button type="button" class="btn cancelbutton" data-dismiss="modal">Cancelar</button>
                     </div>
-                </form>
+               
             </div>
         </div>
     </div>
-
-    <!-- Modal InfoQUIZ-->
+     <!-- Modal InfoQUIZ-->
     <div class="modal fade" id="modalinfo" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
         aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog" role="document">
@@ -259,16 +279,24 @@
                 <form action="Controller?op=login" method="post">
                     <div class="modal-body">
                         <p>
-                            El quiz consiste en adivinar correctamente la pregunta del dia.
+                            El quiz consiste en adivinar el maximo numero de preguntas.
                         </p>
                         <p>
-                            Si logras contestar correctamente la pregunta, al dia siguiente podras volver a hacer el
-                            reto de contestar correctamente otra pregunta.
+                            Las preguntas seran renovadas cada semana.
+                          </p>
+                          <p>
+                            Si aciertas aparecera un tick y si fallas una X.
                         </p>
                         <p>
-                            Si de lo contrario fallas la pregunta, no podras responder la pregunta del siguiente dia,
-                            tendras que esperar 24h.
+                            -Si aciertas menos  de 5 tendrás que seguir estudiando
                         </p>
+                        <p>
+                            -Si aciertas mas de 5 estas aprobado
+                        </p>
+                        <p>
+                            -Si aciertas mas de 8 eres un experto               
+                        </p>
+                        
 
 
                     </div>

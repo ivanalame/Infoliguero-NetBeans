@@ -241,10 +241,12 @@ public class Controller extends HttpServlet {
             
             
              session.setAttribute("user", user);
+             session.removeAttribute("escorrecta");
              request.getRequestDispatcher("home.jsp").forward(request, response);
         }else if (op.equals("logout")) {
             //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
              session.removeAttribute("user");
+             session.removeAttribute("escorrecta");
             //Recargamos la home.jsp
             request.getRequestDispatcher("home.jsp").forward(request, response);
          }else if (op.equals("logoutpremier")) {
