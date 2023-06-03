@@ -4,6 +4,7 @@
     Author     : Iván Juárez
 --%>
 
+<%@page import="entities.Pregunta"%>
 <%@page import="entities.Jugadorit"%>
 <%@page import="entities.Usuario"%>
 <%@page import="entities.Equipoit"%>
@@ -32,6 +33,7 @@
             List<Jugadorit> jugadoresfiltradosit = (List<Jugadorit>) session.getAttribute("jugadoresfiltradosit");
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
+         Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
      
          Usuario user = (Usuario) session.getAttribute("user");
         %>
@@ -153,7 +155,7 @@
     
         </div>
 
-    <div class="mt-4 ">
+    <div class="mt-4">
         <div class=" float-right mb-5 mr-4 ">
             <a class="twitter-timeline" data-lang="es" data-width="400" data-height="500" data-theme="dark" 
              href="https://twitter.com/ivanJua16758008?ref_src=twsrc%5Etfw">Tweets by ivanJua16758008</a> 
@@ -162,21 +164,57 @@
         </div>
         <% if (user!=null) {%>
         <!-- Este Div solo aparecera si estas logeado -->
-        <div class=" float-left  text-center ml-4 ">
-            <h2 class="plantilla"> <strong>¡Atrevete con el quiz!</strong></h2>
+        <div class=" float-left text-center ml-4 ">
+            <h2 class="plantilla text-center"> <strong>¡Atrevete con el quiz!</strong></h2>
             <div id="contador" class="simply-countdown-inline">
             
             </div>
             <div class="mt-3">
-                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">
-                    Quiz Premier League </button>
-                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalinfo">
-                    Informacion Quiz</button>
+                
+         <div class="row disabled no-gutters">
+                <div class="col-4">
+                  <button id="boton1" onclick="desactivarBoton()" class="rounded buttonquizandinfo">1</button>
+                </div>
+                <div class="col-4">
+                  <button class="rounded buttonquizandinfo">4</button>
+                </div>
+                <div class="col-4">
+                  <button class="rounded buttonquizandinfo">7</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">2</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">5</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">8</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">3</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">6</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">9</button>
+                </div>
+            </div>
+
+
+                <button class=" rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalinfo">
+                    Informacion Quiz</button>        
             </div>
 
         </div>
-          <%}
-            %>
+         <%}%>
+            
+            <% if (user!=null&&preguntaseleccionada!=null) {%>
+            <div class="d-flex justify-content-center mb-5 mr-4 ">            
+               <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz" data-pregunta="<%=preguntaseleccionada.getTexto()%>" data-idpregunta="<%=preguntaseleccionada.getId()%>">RESPONDER PREGUNTA</button>
+            </div>
+             <%}%>
+            
 
         <footer class="bg-success p-3 text-center text-white ">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>

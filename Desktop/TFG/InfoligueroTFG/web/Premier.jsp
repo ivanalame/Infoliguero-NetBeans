@@ -116,6 +116,18 @@
           <%}%>  
            
         </div>
+          
+           <% if (escorrecta != null) {%>
+            <div class="row justify-content-center mx-4 mt-3  respuesta ">
+                <% if (escorrecta.getCorrecta()) { %>     
+                       
+                    <img src="img/7efs.gif" alt="" class="w-25">    
+                <% } else { %>       
+                    <img src="img/giphy.gif" alt="" class="w-25">
+                <% } %>
+            </div>
+                   
+            <% } %>
            
         <div class="row justify-content-center px-3">
 
@@ -178,24 +190,24 @@
             <div class="mt-3">
                 
          <div class="row">
-                    <div class="col disabled">
-                       <a class="nav-link" href="Controller?op=vapregunta&pregunta=1"><button  id="boton1" onclick="desactivarBoton()" class="rounded buttonquizandinfo">1</button>
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=4"><button class="rounded buttonquizandinfo">4</button></a>
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=7"><button class="rounded buttonquizandinfo">7</button></a>
+                    <div class="col">
+                       <a class="nav-link" href="Controller?op=vapreguntap&pregunta=1"><button  id="boton1" onclick="desactivarBoton()" class="rounded buttonquizandinfo">1</button>
+                      <a class="nav-link" href="Controller?op=vapreguntap&pregunta=4"><button class="rounded buttonquizandinfo">4</button></a>
+                      <a class="nav-link" href="Controller?op=vapreguntap&pregunta=7"><button class="rounded buttonquizandinfo">7</button></a>
                     </div>
-                    <div class="col disabled">
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=2"><button class="rounded buttonquizandinfo">2</button></a>
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=5"><button class="rounded buttonquizandinfo">5</button></a>
-                      <a class="nav-link" href="Controller?op=vapregunta&pregunta=8"><button class="rounded buttonquizandinfo">8</button></a>
+                    <div class="col">
+                      <a class="nav-link" href="Controller?op=vapreguntap&pregunta=2"><button class="rounded buttonquizandinfo">2</button></a>
+                      <a class="nav-link" href="Controller?op=vapreguntap&pregunta=5"><button class="rounded buttonquizandinfo">5</button></a>
+                      <a class="nav-link" href="Controller?op=vapreguntap&pregunta=8"><button class="rounded buttonquizandinfo">8</button></a>
                      
                     </div>
-                    <div class="col disabled">
-                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=3"><button class="rounded buttonquizandinfo">3</button></a>
-                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=6"><button class="rounded buttonquizandinfo">6</button></a>
-                        <a class="nav-link" href="Controller?op=vapregunta&pregunta=9"><button class="rounded buttonquizandinfo">9</button></a>
+                    <div class="col">
+                        <a class="nav-link" href="Controller?op=vapreguntap&pregunta=3"><button class="rounded buttonquizandinfo">3</button></a>
+                        <a class="nav-link" href="Controller?op=vapreguntap&pregunta=6"><button class="rounded buttonquizandinfo">6</button></a>
+                        <a class="nav-link" href="Controller?op=vapreguntap&pregunta=9"><button class="rounded buttonquizandinfo">9</button></a>
                
                       </div>
-                  </div>
+         </div>
 
                 <button class=" rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalinfo">
                     Informacion Quiz</button>        
@@ -204,7 +216,7 @@
         </div>
          <%}%>
             
-            <% if (user!=null&&escorrecta!=null) {%>
+            <% if (user!=null&&preguntaseleccionada!=null) {%>
             <div class="d-flex justify-content-center mb-5 mr-4 ">            
                <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz" data-pregunta="<%=preguntaseleccionada.getTexto()%>" data-idpregunta="<%=preguntaseleccionada.getId()%>">RESPONDER PREGUNTA</button>
             </div>
@@ -255,7 +267,7 @@
                  
                 </div>
                        
-                    <div class="modal-body quizbutton" id="respuesta">
+                    <div class="modal-body quizbutton" id="respuestap">
                    
                     </div>
             
@@ -309,18 +321,19 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+         
 
     <script type="text/JavaScript" src="vue.js"> </script>
     <script type="text/JavaScript" src="./my.js"> </script>
+     <script src="myjsp.js" type="text/javascript"></script>
+   
     <script>
         const myApp = app.mount("#app");
         const myliga = liga.mount("#ligas");

@@ -4,6 +4,7 @@
     Author     : Iván Juárez
 --%>
 
+<%@page import="entities.Pregunta"%>
 <%@page import="entities.Jugadorfr"%>
 <%@page import="entities.Equipofr"%>
 <%@page import="java.util.List"%>
@@ -33,7 +34,7 @@
             List<Jugadorfr> jugadoresfiltradosfr = (List<Jugadorfr>) session.getAttribute("jugadoresfiltradosfr");
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
-     
+     Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
          Usuario user = (Usuario) session.getAttribute("user");
         %>
     
@@ -166,21 +167,56 @@
         
         <% if (user!=null) {%>
         <!-- Este Div solo aparecera si estas logeado -->
-        <div class=" float-left  text-center ml-4 ">
-            <h2 class="plantilla"> <strong>¡Atrevete con el quiz!</strong></h2>
+        <div class=" float-left text-center ml-4 ">
+            <h2 class="plantilla text-center"> <strong>¡Atrevete con el quiz!</strong></h2>
             <div id="contador" class="simply-countdown-inline">
             
             </div>
             <div class="mt-3">
-                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalquiz">
-                    Quiz Premier League </button>
-                <button class=" rounded buttonquizandinfo" data-toggle="modal" data-target="#modalinfo">
-                    Informacion Quiz</button>
+                
+         <div class="row disabled no-gutters">
+                <div class="col-4">
+                  <button id="boton1" onclick="desactivarBoton()" class="rounded buttonquizandinfo">1</button>
+                </div>
+                <div class="col-4">
+                  <button class="rounded buttonquizandinfo">4</button>
+                </div>
+                <div class="col-4">
+                  <button class="rounded buttonquizandinfo">7</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">2</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">5</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">8</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">3</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">6</button>
+                </div>
+                <div class="col-4 mt-3">
+                  <button class="rounded buttonquizandinfo">9</button>
+                </div>
+            </div>
+
+
+                <button class=" rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalinfo">
+                    Informacion Quiz</button>        
             </div>
 
         </div>
-          <%}
-            %>
+         <%}%>
+            
+            <% if (user!=null&&preguntaseleccionada!=null) {%>
+            <div class="d-flex justify-content-center mb-5 mr-4 ">            
+               <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz" data-pregunta="<%=preguntaseleccionada.getTexto()%>" data-idpregunta="<%=preguntaseleccionada.getId()%>">RESPONDER PREGUNTA</button>
+            </div>
+             <%}%>
 
         <footer class="bg-primary p-3 text-center text-white ">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>

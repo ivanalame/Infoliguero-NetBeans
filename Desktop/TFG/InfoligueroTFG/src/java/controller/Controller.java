@@ -120,6 +120,7 @@ public class Controller extends HttpServlet {
               session.removeAttribute("jugadoresfiltrados");
               session.removeAttribute("jugadoresfiltradosp");
               session.removeAttribute("jugadoresfiltradosit");
+               session.removeAttribute("preguntaseleccionada");
               session.removeAttribute("escorrecta");
              
             request.getRequestDispatcher("home.jsp").forward(request, response);
@@ -143,7 +144,7 @@ public class Controller extends HttpServlet {
 
             request.getRequestDispatcher("home.jsp").forward(request, response);
             
-            } else if (op.equals("vaposicionp")) { 
+           } else if (op.equals("vaposicionp")) { 
              List <Jugadorp> jugadoresfiltradosp ;
              //posicion contiene Portero, por ejemplo
             String posicion = request.getParameter("posicion");
@@ -279,7 +280,18 @@ public class Controller extends HttpServlet {
              session.setAttribute("preguntaseleccionada", preguntaseleccionada);
             
              session.removeAttribute("escorrecta");
-            request.getRequestDispatcher("home.jsp").forward(request, response);    
+            request.getRequestDispatcher("home.jsp").forward(request, response); 
+            
+          } else if (op.equals("vapreguntap")) {
+           String idpregunta = request.getParameter("pregunta");
+           q = em.createQuery("SELECT p FROM Pregunta p WHERE p.id = :id");
+           q.setParameter("id", Integer.parseInt(idpregunta));
+            Pregunta preguntaseleccionada = (Pregunta)q.getSingleResult();
+             
+             session.setAttribute("preguntaseleccionada", preguntaseleccionada);
+            
+             session.removeAttribute("escorrecta");
+            request.getRequestDispatcher("Premier.jsp").forward(request, response);    
          } else if (op.equals("vapremier")) {
            q =  em.createNamedQuery("Equipop.findAll");   //me bajo todos los equipos
            equipospremier  = (List <Equipop>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
@@ -297,6 +309,8 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresfiltradosit");
             session.removeAttribute("jugadoresfiltradosbu");
             session.removeAttribute("jugadoresfiltradosfr");
+            session.removeAttribute("preguntaseleccionada");
+            session.removeAttribute("escorrecta");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
           } else if (op.equals("vaitalia")) {
@@ -316,6 +330,8 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresfiltradosit");
             session.removeAttribute("jugadoresfiltradosbu");
             session.removeAttribute("jugadoresfiltradosfr");
+            session.removeAttribute("preguntaseleccionada");
+              session.removeAttribute("escorrecta");
              
             request.getRequestDispatcher("italia.jsp").forward(request, response);
           } else if (op.equals("vabundes")) {
@@ -335,6 +351,8 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresfiltradosit");
             session.removeAttribute("jugadoresfiltradosbu");
             session.removeAttribute("jugadoresfiltradosfr");
+            session.removeAttribute("preguntaseleccionada");
+              session.removeAttribute("escorrecta");
              
             request.getRequestDispatcher("bundes.jsp").forward(request, response);
           } else if (op.equals("vafrancia")) {
@@ -354,6 +372,8 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresfiltradosit");
             session.removeAttribute("jugadoresfiltradosbu");
             session.removeAttribute("jugadoresfiltradosfr");
+            session.removeAttribute("preguntaseleccionada");
+              session.removeAttribute("escorrecta");
         
              
             request.getRequestDispatcher("francia.jsp").forward(request, response);
@@ -539,6 +559,16 @@ public class Controller extends HttpServlet {
              
             
             request.getRequestDispatcher("respuesta.jsp").forward(request, response);
+            
+         }else if (op.equals("allrespuestasp")) {
+ 
+            String idpregunta = request.getParameter("idpregunta");         //esto es lo que mando desde el myjs
+            preguntaselected = em.find(Pregunta.class, Integer.parseInt(idpregunta));              // 
+                
+           session.setAttribute("respuestas", preguntaselected.getRespuestaList());
+             
+            
+            request.getRequestDispatcher("respuestap.jsp").forward(request, response);
         
         }else if (op.equals("varespuesta")) {
  
@@ -549,7 +579,19 @@ public class Controller extends HttpServlet {
 
             
             request.getRequestDispatcher("home.jsp").forward(request, response);
+        }else if (op.equals("varespuestap")) {
+ 
+            String idrespuesta = request.getParameter("respuesta");         //esto es lo que mando desde el myjs
+            respuestaselected = em.find(Respuesta.class, Integer.parseInt(idrespuesta));        
+                
+           session.setAttribute("escorrecta", respuestaselected);
+
+            
+            request.getRequestDispatcher("Premier.jsp").forward(request, response);
         }
+
+        
+        
         
     }
 
