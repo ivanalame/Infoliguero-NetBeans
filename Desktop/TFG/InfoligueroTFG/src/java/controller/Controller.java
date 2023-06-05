@@ -159,6 +159,9 @@ public class Controller extends HttpServlet {
             
             session.setAttribute("jugadoresfiltradosp", jugadoresfiltradosp);   
             session.setAttribute("equipo", idequipo);
+            
+             session.removeAttribute("escorrecta");
+        
 
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
               
@@ -373,7 +376,7 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresfiltradosbu");
             session.removeAttribute("jugadoresfiltradosfr");
             session.removeAttribute("preguntaseleccionada");
-              session.removeAttribute("escorrecta");
+            session.removeAttribute("escorrecta");
         
              
             request.getRequestDispatcher("francia.jsp").forward(request, response);

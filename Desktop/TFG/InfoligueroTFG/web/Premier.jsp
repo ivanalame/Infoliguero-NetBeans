@@ -290,26 +290,28 @@
                 </div>
                 <form action="Controller?op=login" method="post">
                     <div class="modal-body">
-                        <p>
+                         <p>
                             El quiz consiste en adivinar el maximo numero de preguntas.
                         </p>
                         <p>
-                            Las preguntas seran renovadas cada semana.
+                             Tendrás que pulsar en uno de los botones y tras hacerlo se te desbloqueara la opcion de responder la pregunta. 
                           </p>
+                          <p>
+                           Las preguntas seran renovadas cada semana.
+                        </p>
                           <p>
                             Si aciertas aparecera un tick y si fallas una X.
                         </p>
                         <p>
-                            -Si aciertas menos  de 5 tendrás que seguir estudiando
+                            -Si aciertas menos  de 5 tendrás que seguir estudiando.
                         </p>
                         <p>
-                            -Si aciertas mas de 5 estas aprobado
+                            -Si aciertas mas de 5 estas aprobado.
                         </p>
                         <p>
-                            -Si aciertas mas de 8 eres un experto               
+                            -Si aciertas mas de 8 eres un experto.              
                         </p>
                         
-
 
                     </div>
                     <div class="modal-footer">
@@ -330,17 +332,22 @@
         crossorigin="anonymous"></script>
          
 
-    <script type="text/JavaScript" src="vue.js"> </script>
-    <script type="text/JavaScript" src="./my.js"> </script>
-     <script src="myjsp.js" type="text/javascript"></script>
+    <script src="JavaScript/app.js"></script>
+    <script type="text/JavaScript" src="JavaScript/vue.js"> </script>
+    <script type="text/JavaScript" src="JavaScript/my.js"> </script>
+    
+    <script src="JavaScript/myjsp.js" type="text/javascript"></script>
+   
+    <script type="text/javascript" src="JavaScript/button.js"></script>
    
     <script>
         const myApp = app.mount("#app");
         const myliga = liga.mount("#ligas");
     </script>
 
-    <script src="simplyCountdown.min.js"></script>
-    <script src="contador.js"></script>
+    <script src="JavaScript/simplyCountdown.min.js"></script>
+    <script src="JavaScript/contador.js"></script>
+
 
 </body>
 
