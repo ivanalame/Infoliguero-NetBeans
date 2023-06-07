@@ -223,9 +223,15 @@
              <%}%>
             
 
-        <footer class="bg-purple p-3 text-center text-white ">
+        <footer class="bg-purple p-3 text-center text-white d-flex align-items-center">
+        <div class="d-flex justify-content-between w-100">
+          <div class="flex-grow-1 text-center">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>
+          </div>
+          <div class="tamañoLetra text-white">Numero de soporte técnico: 717 71 26 99</div>
+        </div>
         </footer>
+             
     </div>
 
 

@@ -384,6 +384,9 @@ footer{
     transition: opacity 0.3s ease-in-out;
     border-radius: 10px;
   }
+  .tamañoletra{
+      font-size: 13px;
+  }
 
   /*Contador*/
   .simply-countdown-inline{
