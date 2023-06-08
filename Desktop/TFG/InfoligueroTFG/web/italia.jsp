@@ -85,13 +85,13 @@
             </ul>
         </div>
     </nav>
-    <div class="bg-success text-center  justify-content-center row">
+    <div class="bg-success text-center  justify-content-center row ">
   <% for(Equipoit equipoitalia : equipositalia){%>   
          <a class="nav-link " class="active" href="Controller?op=vaequipoitalia&equipo=<%=equipoitalia.getId()%>&nombre=<%=equipoitalia.getNombre() %>"><img src="<%=equipoitalia.getImagen()%>" alt=""></a>  
      <%}%>      
     </div>
     
-    <div class="text-center pt-3 movemenu text-danger plantilla">  
+    <div class="text-center pt-3 movemenu text-danger plantilla muestranombreequipos">  
         <% if (jugadoresit!=null) {%> 
               <h2><strong>Plantilla del <%= session.getAttribute("nombre")%> </strong></h2>  
         <%}%>      
@@ -100,7 +100,7 @@
     </div>
     <div class="container">
  
-        <div class="row justify-content-center mx-4 pt-3">
+        <div class="row justify-content-center mx-4 pt-3 movefiltro">
             <% if (jugadoresit!=null) {%>      
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaequipoitalia&equipo=<%=equipoSeleccionado.getId()%>&nombre=<%=equipoSeleccionado.getNombre() %>">Todos</a>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicionit&posicion=Portero&equipoId=<%= equipoSeleccionado.getId() %>">Porteros</a>

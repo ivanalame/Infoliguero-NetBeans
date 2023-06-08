@@ -92,7 +92,7 @@
      <%}%>      
     </div>
     
-    <div class="text-center pt-3 movemenu text-danger plantilla">  
+    <div class="text-center pt-3 movemenu text-danger plantilla muestranombreequipos">  
         <% if (jugadoresfr!=null) {%> 
               <h2><strong>Plantilla del <%= session.getAttribute("nombre")%> </strong></h2>  
         <%}%>      
@@ -101,7 +101,7 @@
     </div>
     <div class="container">
         
-         <div class="row justify-content-center mx-4 pt-3">
+         <div class="row justify-content-center mx-4 pt-3 movefiltro">
             <% if (jugadoresfr!=null) {%>      
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaequipofrancia&equipo=<%=equipoSeleccionado.getId()%>&nombre=<%=equipoSeleccionado.getNombre() %>">Todos</a>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicionfr&posicion=Portero&equipoId=<%= equipoSeleccionado.getId() %>">Porteros</a>

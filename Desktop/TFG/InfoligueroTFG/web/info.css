@@ -8,11 +8,11 @@
 }
 
 .fondo{
-  background-image: url('./img/cesped.jpg');
-  background-size: cover;
-    background-repeat: no-repeat;
-    overflow-x: hidden;
-    
+  background-image: url('./img/cesped3.jpg');
+  background-size: 1920px 1080px; /* Tamaño fijo de la imagen de fondo */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Establece la imagen de fondo fija, no se mueve con el desplazamiento de la página */
+  overflow-x: hidden;
 }
 
 .respuesta {
@@ -48,6 +48,16 @@
     animation:tracking-in-expand-forward-top 0.4s linear both}
     @keyframes tracking-in-expand-forward-top{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(-100px);opacity:0}
     40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
+
+.movefiltro{
+    animation:tracking-in-expand-forward-bottom 0.5s linear both} 
+    @keyframes tracking-in-expand-forward-bottom{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(100px);opacity:0}40%{opacity:.6}
+    100%{transform:translateZ(0) translateY(0);opacity:1}}
+    
+.muestranombreequipos{
+    animation:tracking-in-contract 0.7s linear both} 
+    @keyframes tracking-in-contract{0%{letter-spacing:.6em;opacity:0}
+    40%{opacity:.6}100%{letter-spacing:normal;opacity:1}}
 
 footer{
     position: fixed;
