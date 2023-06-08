@@ -15,6 +15,8 @@
     <class>entities.Jugadorit</class>
     <class>entities.Jugadorbu</class>
     <class>entities.Jugadorfr</class>
+    <class>entities.Respuestap</class>
+    <class>entities.Preguntap</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/infoliguero?zeroDateTimeBehavior=convertToNull"/>

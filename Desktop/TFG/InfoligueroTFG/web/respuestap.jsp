@@ -4,15 +4,16 @@
     Author     : Iván Juárez
 --%>
 
+<%@page import="entities.Respuestap"%>
 <%@page import="entities.Respuesta"%>
 <%@page import="java.util.List"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
+    List<Respuestap> respuestas = (List<Respuestap>) session.getAttribute("respuestas");
     %>
 <div class="row justify-content-center px-3">
-    <% for(Respuesta respuesta: respuestas){%>
+    <% for(Respuestap respuesta: respuestas){%>
         <div class="col-12">
         <div class="card p-2 h-100">
             <div class="row">

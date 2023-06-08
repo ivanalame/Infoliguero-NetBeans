@@ -97,7 +97,7 @@
         </div>
     </nav>
                 
-    <div class="bg-danger text-center  justify-content-center row">
+    <div class="bg-danger text-center  justify-content-center row ">
      <% for(Equipo equipo : equipos){%>   
         <!-- Esto nos lo hara un bucle que sacara las imagnenes de la bbdd -->    
               <a class="nav-link" class="active"  href="Controller?op=vaequipo&equipo=<%=equipo.getId()%>&nombre=<%=equipo.getNombre()%>"><img src="<%=equipo.getImagen()%>" class="w-100" alt=""></a>  
@@ -133,7 +133,7 @@
                    
             <% } %>
 
-        
+       
 
         <div class="row justify-content-center px-3 mt-5">
           
@@ -249,26 +249,29 @@
 
     <!-- Modal login-->
     <div class="modal fade" id="modallogin" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-        aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Login & Register</h5>
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title"><i class="fa fa-sign-in-alt mr-2"></i>Login & Register</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="Controller?op=login" method="post">
+                <div class="modal-body">
+                    <p class="mb-3">
+                        <label for="nick" class="mr-2">Usuario:</label>
+                        <input type="text" name="nick" id="nick" class="form-control" placeholder="Ingresa tu nombre de usuario">
+                    </p>
+                    <p class="mb-3">
+                        <label for="pass" class="mr-2">Contraseña:</label>
+                        <input type="password" name="pass" id="pass" class="form-control" placeholder="Ingresa tu contraseña">
+                    </p>
                 </div>
-                <form action="Controller?op=login" method="post">
-                    <div class="modal-body text-center">
-                        <p>
-                            <input type="text" name="nick" id="" placeholder="Usuario">
-                        </p>
-                        <p>
-                            <input type="password" name="pass" id="" placeholder="Contraseña">
-                        </p>
-
-
-                    </div>
-                    <div class="modal-footer ">
-                        <button type="submit" class="btn loginbutton">Login & Register</button>
-                        <button type="button" class="btn cancelbutton" data-dismiss="modal"> &times; Cancelar</button>
+                <div class="modal-footer">
+                    <button type="submit" class="btn loginbutton">Iniciar sesión</button>
+                    <button type="button" class="btn cancelbutton" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
             </div>

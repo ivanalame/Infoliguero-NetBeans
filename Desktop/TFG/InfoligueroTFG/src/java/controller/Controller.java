@@ -11,7 +11,9 @@ import entities.Jugadorfr;
 import entities.Jugadorit;
 import entities.Jugadorp;
 import entities.Pregunta;
+import entities.Preguntap;
 import entities.Respuesta;
+import entities.Respuestap;
 import entities.Usuario;
 import java.io.IOException;
 import java.sql.Connection;
@@ -80,8 +82,10 @@ public class Controller extends HttpServlet {
            
           List <Pregunta> preguntas ;
           Pregunta preguntaselected;
+            Preguntap       preguntapselected;
           List <Respuesta> respuestas; 
            Respuesta respuestaselected;
+           Respuestap respuestapselecetd;
           EntityTransaction t;
          
         EntityManager em = (EntityManager) session.getAttribute("em");
@@ -287,11 +291,11 @@ public class Controller extends HttpServlet {
             
           } else if (op.equals("vapreguntap")) {
            String idpregunta = request.getParameter("pregunta");
-           q = em.createQuery("SELECT p FROM Pregunta p WHERE p.id = :id");
+           q = em.createQuery("SELECT p FROM Preguntap p WHERE p.id = :id");
            q.setParameter("id", Integer.parseInt(idpregunta));
-            Pregunta preguntaseleccionada = (Pregunta)q.getSingleResult();
+            Preguntap preguntapseleccionada = (Preguntap)q.getSingleResult();
              
-             session.setAttribute("preguntaseleccionada", preguntaseleccionada);
+             session.setAttribute("preguntapseleccionada", preguntapseleccionada);
             
              session.removeAttribute("escorrecta");
             request.getRequestDispatcher("Premier.jsp").forward(request, response);    
@@ -504,6 +508,7 @@ public class Controller extends HttpServlet {
             
               session.removeAttribute("jugadoresfiltrados");
               session.removeAttribute("jugadoresfiltradosp");
+               session.removeAttribute("escorrecta");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
             
@@ -566,9 +571,9 @@ public class Controller extends HttpServlet {
          }else if (op.equals("allrespuestasp")) {
  
             String idpregunta = request.getParameter("idpregunta");         //esto es lo que mando desde el myjs
-            preguntaselected = em.find(Pregunta.class, Integer.parseInt(idpregunta));              // 
+            preguntapselected = em.find(Preguntap.class, Integer.parseInt(idpregunta));              // 
                 
-           session.setAttribute("respuestas", preguntaselected.getRespuestaList());
+           session.setAttribute("respuestas", preguntapselected.getRespuestapList());
              
             
             request.getRequestDispatcher("respuestap.jsp").forward(request, response);
@@ -585,9 +590,9 @@ public class Controller extends HttpServlet {
         }else if (op.equals("varespuestap")) {
  
             String idrespuesta = request.getParameter("respuesta");         //esto es lo que mando desde el myjs
-            respuestaselected = em.find(Respuesta.class, Integer.parseInt(idrespuesta));        
+            respuestapselecetd = em.find(Respuestap.class, Integer.parseInt(idrespuesta));        
                 
-           session.setAttribute("escorrecta", respuestaselected);
+           session.setAttribute("escorrecta", respuestapselecetd);
 
             
             request.getRequestDispatcher("Premier.jsp").forward(request, response);

@@ -4,6 +4,8 @@
     Author     : Iván Juárez
 --%>
 
+<%@page import="entities.Respuestap"%>
+<%@page import="entities.Preguntap"%>
 <%@page import="entities.Respuesta"%>
 <%@page import="entities.Pregunta"%>
 <%@page import="entities.Jugadorp"%>
@@ -36,8 +38,8 @@
           Equipop equipoSeleccionado = (Equipop) session.getAttribute("equipopselected"); 
        //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
         //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
-          Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
-         Respuesta escorrecta = (Respuesta) session.getAttribute("escorrecta"); 
+          Preguntap preguntapseleccionada = (Preguntap) session.getAttribute("preguntapseleccionada");
+         Respuestap escorrecta = (Respuestap) session.getAttribute("escorrecta"); 
      
          Usuario user = (Usuario) session.getAttribute("user");
         %>
@@ -216,9 +218,9 @@
         </div>
          <%}%>
             
-            <% if (user!=null&&preguntaseleccionada!=null) {%>
+            <% if (user!=null&&preguntapseleccionada!=null) {%>
             <div class="d-flex justify-content-center mb-5 mr-4 ">            
-               <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz" data-pregunta="<%=preguntaseleccionada.getTexto()%>" data-idpregunta="<%=preguntaseleccionada.getId()%>">RESPONDER PREGUNTA</button>
+               <button class="rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalquiz" data-pregunta="<%=preguntapseleccionada.getTexto()%>" data-idpregunta="<%=preguntapseleccionada.getId()%>">RESPONDER PREGUNTA</button>
             </div>
              <%}%>
             
@@ -237,26 +239,29 @@
 
     <!-- Modal login-->
     <div class="modal fade" id="modallogin" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-        aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Login & Register</h5>
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-purple text-white">
+                <h5 class="modal-title"><i class="fa fa-sign-in-alt mr-2"></i>Login & Register</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="Controller?op=loginpremier" method="post">
+                <div class="modal-body">
+                    <p class="mb-3">
+                        <label for="nick" class="mr-2">Usuario:</label>
+                        <input type="text" name="nick" id="nick" class="form-control" placeholder="Ingresa tu nombre de usuario">
+                    </p>
+                    <p class="mb-3">
+                        <label for="pass" class="mr-2">Contraseña:</label>
+                        <input type="password" name="pass" id="pass" class="form-control" placeholder="Ingresa tu contraseña">
+                    </p>
                 </div>
-                <form action="Controller?op=loginpremier" method="post">
-                    <div class="modal-body text-center">
-                        <p>
-                            <input type="text" name="nick" id="" placeholder="Usuario">
-                        </p>
-                        <p>
-                            <input type="password" name="pass" id="" placeholder="Contraseña">
-                        </p>
-
-
-                    </div>
-                    <div class="modal-footer ">
-                        <button type="submit" class="btn loginbutton">Login & Register</button>
-                        <button type="button" class="btn cancelbutton" data-dismiss="modal"> &times; Cancelar</button>
+                <div class="modal-footer">
+                    <button type="submit" class="btn loginbutton">Iniciar sesión</button>
+                    <button type="button" class="btn cancelbutton" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
             </div>

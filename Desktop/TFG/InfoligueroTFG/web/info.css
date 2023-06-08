@@ -14,6 +14,7 @@
     overflow-x: hidden;
     
 }
+
 .respuesta {
   background-color: rgba(0,0,0,0); /* Fondo transparente */
     padding: 20px; /* Añade un padding para tener un espacio en el interior del div */
