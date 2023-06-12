@@ -101,9 +101,9 @@ public class Controller extends HttpServlet {
             session.setAttribute("equipos", equipos);        
             
             session.removeAttribute("nombre");
-            session.removeAttribute("jugadores");
+             session.removeAttribute("jugadores");
             session.removeAttribute("jugadoresfiltrados");
-            
+            session.removeAttribute("equiposelected");         
             session.removeAttribute("jugadoresfiltradosp");
             
             session.removeAttribute("escorrecta");

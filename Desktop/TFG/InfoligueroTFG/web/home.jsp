@@ -18,7 +18,7 @@
 <html lang="en">
 
 <head>
-    
+   
     <title>InfoLiguero</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -43,7 +43,7 @@
           List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
           List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
            
-     
+        Equipo equipoSeleccionado = (Equipo) session.getAttribute("equiposelected");
          // Equipo idequipo = (Equipo) session.getAttribute("idequipo");  //ver 
         Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
          Respuesta escorrecta = (Respuesta) session.getAttribute("escorrecta"); 
@@ -86,9 +86,9 @@
                 </li>
                 <li class="ms-auto">
                      <% if (user!=null) {%>
-                     <h5 class="text-white">Bienvenido <%=user.getNick()%> </h5><a href="Controller?op=logout"><button class="cancelbutton ml-3">Logout</button></a>
+                     <h5 class="text-white">Bienvenido <%=user.getNick()%> </h5><a href="Controller?op=logout"><button class="cancelbutton ml-3 text-center">Logout</button></a>
                     <%} else {%>
-                    <button class="loginbutton " data-toggle="modal" data-target="#modallogin">
+                    <button class="loginbutton text-center " data-toggle="modal" data-target="#modallogin">
                         Login <img src="" alt="" class="w-25 pl-1"></button>
                          <%}
             %>
@@ -105,20 +105,23 @@
     <%}%>
       </div>  
       
+      <% if (equipoSeleccionado != null) { %>
          <div class="text-center pt-3 movemenu text-danger plantilla muestranombreequipos">   
              <h2><strong>Plantilla del <%= session.getAttribute("nombre")%> </strong></h2>     
         </div> 
-    
+     <% } %>
       
     <div class="container  ">
      
         <div class="row justify-content-center mx-4 pt-3 movefiltro">
-           <% Equipo equipoSeleccionado = (Equipo) session.getAttribute("equiposelected"); %>
+          
+           <% if (equipoSeleccionado != null) { %>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaequipo&equipo=<%=equipoSeleccionado.getId()%>&nombre=<%=equipoSeleccionado.getNombre()%>">Todos</a>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Portero&equipoId=<%= equipoSeleccionado.getId() %>">Porteros</a>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Defensa&equipoId=<%= equipoSeleccionado.getId() %>">Defensas</a>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Centrocampista&equipoId=<%= equipoSeleccionado.getId() %>">Centrocampistas</a>
            <a class="btn loginbutton nav-link mx-3" class="active" href="Controller?op=vaposicion&posicion=Delantero&equipoId=<%= equipoSeleccionado.getId() %>">Delanteros</a>
+           <% } %>
         </div>
         
          <% if (escorrecta != null) {%>
@@ -139,7 +142,7 @@
           
     
 <%      
-    if (jugadoresfiltrados == null) {
+    if (jugadoresfiltrados == null && jugadores != null) {
             for(Jugador jugador : jugadores){%>   
             <div class="col-md-6 col-lg-4 p-3 movediv">
                 <div class="card h-100 colorborde">
@@ -159,7 +162,7 @@
             </div>
 <%}%>    
    
-       <%} else {
+       <%} else if (jugadoresfiltrados != null) {
             for(Jugador jugador : jugadoresfiltrados){ %> 
         <div class="col-md-6 col-lg-4 p-3 movediv">
                 <div class="card h-100 colorborde">
@@ -350,9 +353,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
    
-    
-
+   
     <script src="JavaScript/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+
+
     <script type="text/JavaScript" src="JavaScript/vue.js"> </script>
     <script type="text/JavaScript" src="JavaScript/my.js"> </script>
     
@@ -366,7 +371,7 @@
     </script>
 
     <script src="JavaScript/simplyCountdown.min.js"></script>
-    <script src="JavaScript/contador.js"></script>
+    <script src="JavaScript/contador.js"></script> 
 
 </body>
 

@@ -73,7 +73,7 @@
                     <a class="nav-link dropdown-toggle seleccionbutton" href="#" id="dropdownId" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Selecciona Liga</a>
                     <div id="ligas" class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item movediv" href="Controller?op=vaequipo&equipo=1">{{laliga}}</a>
+                        <a class="dropdown-item movediv" href="Controller?op=inicio">{{laliga}}</a>
                         <a class="dropdown-item movediv" href="Controller?op=vapremier">{{premier}}</a>
                         <a class="dropdown-item movediv" href="Controller?op=vaitalia">{{serie}}</a>
                         <a class="dropdown-item movediv" href="Controller?op=vabundes">{{bundesliga}} </a>
