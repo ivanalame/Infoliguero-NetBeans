@@ -316,7 +316,7 @@ public class Controller extends HttpServlet {
             session.removeAttribute("jugadoresfiltradosit");
             session.removeAttribute("jugadoresfiltradosbu");
             session.removeAttribute("jugadoresfiltradosfr");
-            session.removeAttribute("preguntaseleccionada");
+            session.removeAttribute("preguntapseleccionada");
             session.removeAttribute("escorrecta");
              
             request.getRequestDispatcher("Premier.jsp").forward(request, response);

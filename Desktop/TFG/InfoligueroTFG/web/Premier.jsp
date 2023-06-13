@@ -174,15 +174,15 @@
      <% } %>
     
         </div>
-
+ </div>
     <div class="mt-4 ">
         <div class=" float-right mb-5 mr-4 ">
-            <a class="twitter-timeline" data-lang="es" data-width="400" data-height="500" data-theme="dark" 
+          <a class="twitter-timeline" data-lang="es" data-width="400" data-height="500" data-theme="dark" 
              href="https://twitter.com/ivanJua16758008?ref_src=twsrc%5Etfw">Tweets by ivanJua16758008</a> 
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
         </div>
-             <% if (user!=null) {%>
+
+           <% if (user!=null) {%>
         <!-- Este Div solo aparecera si estas logeado -->
         <div class=" float-left  text-center ml-4 ">
             <h2 class="plantilla"> <strong>¡Atrevete con el quiz!</strong></h2>
@@ -205,11 +205,11 @@
                     </div>
                     <div class="col">
                         <a class="nav-link" href="Controller?op=vapreguntap&pregunta=3"><button class="rounded buttonquizandinfo">3</button></a>
-                        <a class="nav-link" href="Controller?op=vapreguntap&pregunta=6"><button class="rounded buttonquizandinfo">6</button></a>
+                        <a class="nav-link" href="Controller?op=vapreguntpa&pregunta=6"><button class="rounded buttonquizandinfo">6</button></a>
                         <a class="nav-link" href="Controller?op=vapreguntap&pregunta=9"><button class="rounded buttonquizandinfo">9</button></a>
                
                       </div>
-         </div>
+                  </div>
 
                 <button class=" rounded buttonquizandinfo mt-3" data-toggle="modal" data-target="#modalinfo">
                     Informacion Quiz</button>        
@@ -224,17 +224,18 @@
             </div>
              <%}%>
             
-
-        <footer class="bg-purple p-3 text-center text-white d-flex align-items-center">
+            
+            
+     <footer class="bg-danger p-3 text-center text-white d-flex align-items-center">
         <div class="d-flex justify-content-between w-100">
           <div class="flex-grow-1 text-center">
             <h2>&copy; Iván Juárez-S2DAM InfoLiguero-TFG</h2>
           </div>
           <div class="tamañoLetra text-white">Numero de soporte técnico: 717 71 26 99</div>
         </div>
-        </footer>
-             
-    </div>
+    </footer>
+
+   </div>
 
 
     <!-- Modal login-->

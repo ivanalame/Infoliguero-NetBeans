@@ -153,11 +153,9 @@
       <% } %>
      <% } %>
      <% } %>
-           
-       
-
+ 
     </div>
-
+ </div>
     <div class="mt-4 ">
         <div class=" float-right mb-5 mr-4 ">
             <a class="twitter-timeline" data-lang="es" data-width="400" data-height="500" data-theme="dark" 
