@@ -40,11 +40,8 @@
          List<Equipo> equipos = (List<Equipo>) session.getAttribute("equipos");
           List<Jugador> jugadores = (List<Jugador>) session.getAttribute("jugadores");
           List<Jugador> jugadoresfiltrados = (List<Jugador>) session.getAttribute("jugadoresfiltrados");
-          List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
-          List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
-           
         Equipo equipoSeleccionado = (Equipo) session.getAttribute("equiposelected");
-         // Equipo idequipo = (Equipo) session.getAttribute("idequipo");  //ver 
+        
         Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
          Respuesta escorrecta = (Respuesta) session.getAttribute("escorrecta"); 
          Usuario user = (Usuario) session.getAttribute("user");

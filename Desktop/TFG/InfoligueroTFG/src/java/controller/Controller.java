@@ -79,13 +79,13 @@ public class Controller extends HttpServlet {
           List <Jugadorit> jugadoresit;
           List <Jugadorbu> jugadoresbu;
           List <Jugadorfr> jugadoresfr;
-           
-          List <Pregunta> preguntas ;
+
           Pregunta preguntaselected;
-            Preguntap       preguntapselected;
-          List <Respuesta> respuestas; 
+          Preguntap  preguntapselected;
+          
            Respuesta respuestaselected;
            Respuestap respuestapselecetd;
+           
           EntityTransaction t;
          
         EntityManager em = (EntityManager) session.getAttribute("em");
@@ -95,6 +95,8 @@ public class Controller extends HttpServlet {
         }
 
         String op = request.getParameter("op");
+        
+        //Seleccionamos cualquier liga 
         if (op.equals("inicio")) {
           q =  em.createNamedQuery("Equipo.findAll");   //me bajo todos los equipos
            equipos  = (List <Equipo>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
@@ -110,6 +112,95 @@ public class Controller extends HttpServlet {
             
             
             request.getRequestDispatcher("home.jsp").forward(request, response);
+            
+        } else if (op.equals("vapremier")) {
+           q =  em.createNamedQuery("Equipop.findAll");   
+           equipospremier  = (List <Equipop>)q.getResultList();   
+            session.setAttribute("equiposp", equipospremier);  
+            
+             session.removeAttribute("nombre");
+            session.removeAttribute("jugadores");
+            session.removeAttribute("jugadoresp");
+            session.removeAttribute("jugadoresit");
+            session.removeAttribute("jugadoresbu");
+            session.removeAttribute("jugadoresfr");
+
+            session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosp");
+            session.removeAttribute("jugadoresfiltradosit");
+            session.removeAttribute("jugadoresfiltradosbu");
+            session.removeAttribute("jugadoresfiltradosfr");
+            session.removeAttribute("preguntapseleccionada");
+            session.removeAttribute("escorrecta");
+             
+            request.getRequestDispatcher("Premier.jsp").forward(request, response);
+        } else if (op.equals("vaitalia")) {
+           q =  em.createNamedQuery("Equipoit.findAll");   
+           equipositalia  = (List <Equipoit>)q.getResultList();    
+            session.setAttribute("equiposit", equipositalia);  
+            
+            session.removeAttribute("nombre");
+            session.removeAttribute("jugadores");
+            session.removeAttribute("jugadoresp");
+            session.removeAttribute("jugadoresit");
+            session.removeAttribute("jugadoresbu");
+            session.removeAttribute("jugadoresfr");
+
+            session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosp");
+            session.removeAttribute("jugadoresfiltradosit");
+            session.removeAttribute("jugadoresfiltradosbu");
+            session.removeAttribute("jugadoresfiltradosfr");
+            session.removeAttribute("preguntaseleccionada");
+              session.removeAttribute("escorrecta");
+             
+            request.getRequestDispatcher("italia.jsp").forward(request, response);
+        } else if (op.equals("vabundes")) {
+           q =  em.createNamedQuery("Equipobu.findAll");   
+           equiposbundes  = (List <Equipobu>)q.getResultList();   
+            session.setAttribute("equiposbu", equiposbundes);  
+            
+            session.removeAttribute("nombre");
+            session.removeAttribute("jugadores");
+            session.removeAttribute("jugadoresp");
+            session.removeAttribute("jugadoresit");
+            session.removeAttribute("jugadoresbu");
+            session.removeAttribute("jugadoresfr");
+
+            session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosp");
+            session.removeAttribute("jugadoresfiltradosit");
+            session.removeAttribute("jugadoresfiltradosbu");
+            session.removeAttribute("jugadoresfiltradosfr");
+            session.removeAttribute("preguntaseleccionada");
+              session.removeAttribute("escorrecta");
+             
+            request.getRequestDispatcher("bundes.jsp").forward(request, response);
+        } else if (op.equals("vafrancia")) {
+           q =  em.createNamedQuery("Equipofr.findAll");   
+           equiposfrancia  = (List <Equipofr>)q.getResultList();   
+            session.setAttribute("equiposfr", equiposfrancia);  
+            
+            session.removeAttribute("nombre");
+            session.removeAttribute("jugadores");
+            session.removeAttribute("jugadoresp");
+            session.removeAttribute("jugadoresit");
+            session.removeAttribute("jugadoresbu");
+            session.removeAttribute("jugadoresfr");
+
+            session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosp");
+            session.removeAttribute("jugadoresfiltradosit");
+            session.removeAttribute("jugadoresfiltradosbu");
+            session.removeAttribute("jugadoresfiltradosfr");
+            session.removeAttribute("preguntaseleccionada");
+            session.removeAttribute("escorrecta");
+        
+             
+            request.getRequestDispatcher("francia.jsp").forward(request, response);
+            
+           //Seleccionamos un equipo en cualquier liga 
+            
         } else if (op.equals("vaequipo")) {
             String idequipo = request.getParameter("equipo");
             //lo busco en la bbdd
@@ -118,8 +209,8 @@ public class Controller extends HttpServlet {
             
             session.setAttribute("jugadores", jugadores);
             
-            session.setAttribute("equiposelected", equiposelected);  //ver
-            session.setAttribute("nombre", equiposelected.getNombre()); // agrego el nombre del equipo
+            session.setAttribute("equiposelected", equiposelected); 
+            session.setAttribute("nombre", equiposelected.getNombre()); 
             
               session.removeAttribute("jugadoresfiltrados");
               session.removeAttribute("jugadoresfiltradosp");
@@ -128,7 +219,71 @@ public class Controller extends HttpServlet {
               session.removeAttribute("escorrecta");
              
             request.getRequestDispatcher("home.jsp").forward(request, response);
+        } else if (op.equals("vaequipopremier")) {
+            String idequipo = request.getParameter("equipo");
            
+            equipopselected = em.find(Equipop.class, Integer.parseInt(idequipo));
+            jugadoresp = equipopselected.getJugadorpList();
+            
+            session.setAttribute("jugadoresp", jugadoresp);
+            
+            session.setAttribute("equipopselected", equipopselected);  
+            session.setAttribute("nombre", equipopselected.getNombre()); 
+            
+              session.removeAttribute("jugadoresfiltrados");
+              session.removeAttribute("jugadoresfiltradosp");
+               session.removeAttribute("escorrecta");
+             
+            request.getRequestDispatcher("Premier.jsp").forward(request, response);
+            
+        } else if (op.equals("vaequipoitalia")) {
+            String idequipo = request.getParameter("equipo");
+           
+            equipoitselected = em.find(Equipoit.class, Integer.parseInt(idequipo));
+            jugadoresit = equipoitselected.getJugadoritList();
+            
+            session.setAttribute("jugadoresit", jugadoresit);
+            
+            session.setAttribute("equipoitselected", equipoitselected);  
+            session.setAttribute("nombre", equipoitselected.getNombre()); 
+            
+              session.removeAttribute("jugadoresfiltrados");
+              session.removeAttribute("jugadoresfiltradosit");
+             
+            request.getRequestDispatcher("italia.jsp").forward(request, response);
+         } else if (op.equals("vaequipobundes")) {
+            String idequipo = request.getParameter("equipo");
+          
+            equipobuselected = em.find(Equipobu.class, Integer.parseInt(idequipo));
+            jugadoresbu = equipobuselected.getJugadorbuList();
+            
+            session.setAttribute("jugadoresbu", jugadoresbu);
+            
+            session.setAttribute("equipobuselected", equipobuselected);  
+            session.setAttribute("nombre", equipobuselected.getNombre()); 
+            
+             session.removeAttribute("jugadoresfiltrados");
+             session.removeAttribute("jugadoresfiltradosbu");
+             
+            request.getRequestDispatcher("bundes.jsp").forward(request, response);  
+         } else if (op.equals("vaequipofrancia")) {
+            String idequipo = request.getParameter("equipo");
+           
+            equipofrselected = em.find(Equipofr.class, Integer.parseInt(idequipo));
+            jugadoresfr = equipofrselected.getJugadorfrList();
+            
+            session.setAttribute("jugadoresfr", jugadoresfr);
+            
+            session.setAttribute("equipofrselected", equipofrselected);  
+            session.setAttribute("nombre", equipofrselected.getNombre()); 
+            
+            session.removeAttribute("jugadoresfiltrados");
+            session.removeAttribute("jugadoresfiltradosfr");
+             
+            request.getRequestDispatcher("francia.jsp").forward(request, response);     
+           
+            
+          //Seleccionamos una posicion en cualquier liga 
         } else if (op.equals("vaposicion")) { 
              List <Jugador> jugadoresfiltrados ;
              //posicion contiene Portero, por ejemplo
@@ -148,7 +303,7 @@ public class Controller extends HttpServlet {
 
             request.getRequestDispatcher("home.jsp").forward(request, response);
             
-           } else if (op.equals("vaposicionp")) { 
+        } else if (op.equals("vaposicionp")) { 
              List <Jugadorp> jugadoresfiltradosp ;
              //posicion contiene Portero, por ejemplo
             String posicion = request.getParameter("posicion");
@@ -169,7 +324,7 @@ public class Controller extends HttpServlet {
 
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
               
-           } else if (op.equals("vaposicionit")) { 
+         } else if (op.equals("vaposicionit")) { 
              List <Jugadorit> jugadoresfiltradosit ;
              //posicion contiene Portero, por ejemplo
             String posicion = request.getParameter("posicion");
@@ -187,7 +342,7 @@ public class Controller extends HttpServlet {
 
             request.getRequestDispatcher("italia.jsp").forward(request, response);
             
-           } else if (op.equals("vaposicionbu")) { 
+         } else if (op.equals("vaposicionbu")) { 
              List <Jugadorbu> jugadoresfiltradosbu ;
              //posicion contiene Portero, por ejemplo
             String posicion = request.getParameter("posicion");
@@ -205,7 +360,7 @@ public class Controller extends HttpServlet {
 
             request.getRequestDispatcher("bundes.jsp").forward(request, response);
             
-            } else if (op.equals("vaposicionfr")) { 
+         } else if (op.equals("vaposicionfr")) { 
              List <Jugadorfr> jugadoresfiltradosfr ;
              //posicion contiene Portero, por ejemplo
             String posicion = request.getParameter("posicion");
@@ -223,6 +378,7 @@ public class Controller extends HttpServlet {
 
             request.getRequestDispatcher("francia.jsp").forward(request, response);
                
+          //Nos logueamos en cualquier liga 
         } else if (op.equals("login")) {
             
              String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
@@ -235,7 +391,7 @@ public class Controller extends HttpServlet {
             }
                      
            
-            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+            if (user == null) {                //si no encuentro el usuarios, lo creo 
                   user = new Usuario(1);
                   user.setNick(nick);
  		  user.setPass(pass);
@@ -251,143 +407,11 @@ public class Controller extends HttpServlet {
              session.setAttribute("user", user);
              session.removeAttribute("escorrecta");
              request.getRequestDispatcher("home.jsp").forward(request, response);
-        }else if (op.equals("logout")) {
-            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
-             session.removeAttribute("user");
-             session.removeAttribute("escorrecta");
-            //Recargamos la home.jsp
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-         }else if (op.equals("logoutpremier")) {
-            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
-             session.removeAttribute("user");
-            //Recargamos la home.jsp
-            request.getRequestDispatcher("Premier.jsp").forward(request, response);
-         }else if (op.equals("logoutitalia")) {
-            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
-             session.removeAttribute("user");
-            //Recargamos la home.jsp
-            request.getRequestDispatcher("italia.jsp").forward(request, response);
-         }else if (op.equals("logoutbundes")) {
-            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
-             session.removeAttribute("user");
-            //Recargamos la home.jsp
-            request.getRequestDispatcher("bundes.jsp").forward(request, response);
-            
-         }else if (op.equals("logoutfrancia")) {
-            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
-             session.removeAttribute("user");
-            //Recargamos la home.jsp
-            request.getRequestDispatcher("francia.jsp").forward(request, response);
-         } else if (op.equals("vapregunta")) {
-           String idpregunta = request.getParameter("pregunta");
-           q = em.createQuery("SELECT p FROM Pregunta p WHERE p.id = :id");
-           q.setParameter("id", Integer.parseInt(idpregunta));
-            Pregunta preguntaseleccionada = (Pregunta)q.getSingleResult();
-             
-             session.setAttribute("preguntaseleccionada", preguntaseleccionada);
-            
-             session.removeAttribute("escorrecta");
-            request.getRequestDispatcher("home.jsp").forward(request, response); 
-            
-          } else if (op.equals("vapreguntap")) {
-           String idpregunta = request.getParameter("pregunta");
-           q = em.createQuery("SELECT p FROM Preguntap p WHERE p.id = :id");
-           q.setParameter("id", Integer.parseInt(idpregunta));
-            Preguntap preguntapseleccionada = (Preguntap)q.getSingleResult();
-             
-             session.setAttribute("preguntapseleccionada", preguntapseleccionada);
-            
-             session.removeAttribute("escorrecta");
-            request.getRequestDispatcher("Premier.jsp").forward(request, response);    
-         } else if (op.equals("vapremier")) {
-           q =  em.createNamedQuery("Equipop.findAll");   //me bajo todos los equipos
-           equipospremier  = (List <Equipop>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
-            session.setAttribute("equiposp", equipospremier);  
-            
-             session.removeAttribute("nombre");
-            session.removeAttribute("jugadores");
-            session.removeAttribute("jugadoresp");
-            session.removeAttribute("jugadoresit");
-            session.removeAttribute("jugadoresbu");
-            session.removeAttribute("jugadoresfr");
-
-            session.removeAttribute("jugadoresfiltrados");
-            session.removeAttribute("jugadoresfiltradosp");
-            session.removeAttribute("jugadoresfiltradosit");
-            session.removeAttribute("jugadoresfiltradosbu");
-            session.removeAttribute("jugadoresfiltradosfr");
-            session.removeAttribute("preguntapseleccionada");
-            session.removeAttribute("escorrecta");
-             
-            request.getRequestDispatcher("Premier.jsp").forward(request, response);
-          } else if (op.equals("vaitalia")) {
-           q =  em.createNamedQuery("Equipoit.findAll");   //me bajo todos los equipos
-           equipositalia  = (List <Equipoit>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
-            session.setAttribute("equiposit", equipositalia);  
-            
-            session.removeAttribute("nombre");
-            session.removeAttribute("jugadores");
-            session.removeAttribute("jugadoresp");
-            session.removeAttribute("jugadoresit");
-            session.removeAttribute("jugadoresbu");
-            session.removeAttribute("jugadoresfr");
-
-            session.removeAttribute("jugadoresfiltrados");
-            session.removeAttribute("jugadoresfiltradosp");
-            session.removeAttribute("jugadoresfiltradosit");
-            session.removeAttribute("jugadoresfiltradosbu");
-            session.removeAttribute("jugadoresfiltradosfr");
-            session.removeAttribute("preguntaseleccionada");
-              session.removeAttribute("escorrecta");
-             
-            request.getRequestDispatcher("italia.jsp").forward(request, response);
-          } else if (op.equals("vabundes")) {
-           q =  em.createNamedQuery("Equipobu.findAll");   //me bajo todos los equipos
-           equiposbundes  = (List <Equipobu>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
-            session.setAttribute("equiposbu", equiposbundes);  
-            
-            session.removeAttribute("nombre");
-            session.removeAttribute("jugadores");
-            session.removeAttribute("jugadoresp");
-            session.removeAttribute("jugadoresit");
-            session.removeAttribute("jugadoresbu");
-            session.removeAttribute("jugadoresfr");
-
-            session.removeAttribute("jugadoresfiltrados");
-            session.removeAttribute("jugadoresfiltradosp");
-            session.removeAttribute("jugadoresfiltradosit");
-            session.removeAttribute("jugadoresfiltradosbu");
-            session.removeAttribute("jugadoresfiltradosfr");
-            session.removeAttribute("preguntaseleccionada");
-              session.removeAttribute("escorrecta");
-             
-            request.getRequestDispatcher("bundes.jsp").forward(request, response);
-          } else if (op.equals("vafrancia")) {
-           q =  em.createNamedQuery("Equipofr.findAll");   //me bajo todos los equipos
-           equiposfrancia  = (List <Equipofr>)q.getResultList();   //esto me devuelve un list por eso lo declaro como List, creo arriba el list de equipos 
-            session.setAttribute("equiposfr", equiposfrancia);  
-            
-            session.removeAttribute("nombre");
-            session.removeAttribute("jugadores");
-            session.removeAttribute("jugadoresp");
-            session.removeAttribute("jugadoresit");
-            session.removeAttribute("jugadoresbu");
-            session.removeAttribute("jugadoresfr");
-
-            session.removeAttribute("jugadoresfiltrados");
-            session.removeAttribute("jugadoresfiltradosp");
-            session.removeAttribute("jugadoresfiltradosit");
-            session.removeAttribute("jugadoresfiltradosbu");
-            session.removeAttribute("jugadoresfiltradosfr");
-            session.removeAttribute("preguntaseleccionada");
-            session.removeAttribute("escorrecta");
         
-             
-            request.getRequestDispatcher("francia.jsp").forward(request, response);
-           
+        
          }else if (op.equals("loginpremier")) {
             
-             String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
+             String nick = request.getParameter("nick");     
              String pass = request.getParameter("pass");
              
              q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = '"+nick+"' and u.pass ='"+pass+"'");
@@ -397,13 +421,13 @@ public class Controller extends HttpServlet {
             }
                      
            
-            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+            if (user == null) {                
                   user = new Usuario(1);
                   user.setNick(nick);
  		  user.setPass(pass);
                 
-                //con estas lineas hacemos el insert, para inserta el dato en la base de datos 
-                  t = em.getTransaction(); //lo inserto en la  base de datos
+               
+                  t = em.getTransaction(); 
                   t.begin();
                   em.persist(user);          
                   t.commit();       
@@ -412,9 +436,9 @@ public class Controller extends HttpServlet {
             
              session.setAttribute("user", user);
              request.getRequestDispatcher("Premier.jsp").forward(request, response);
-             }else if (op.equals("loginitalia")) {
+         }else if (op.equals("loginitalia")) {
             
-             String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
+             String nick = request.getParameter("nick");    
              String pass = request.getParameter("pass");
              
              q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = '"+nick+"' and u.pass ='"+pass+"'");
@@ -424,13 +448,13 @@ public class Controller extends HttpServlet {
             }
                      
            
-            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+            if (user == null) {                
                   user = new Usuario(1);
                   user.setNick(nick);
  		  user.setPass(pass);
                 
-                //con estas lineas hacemos el insert, para inserta el dato en la base de datos 
-                  t = em.getTransaction(); //lo inserto en la  base de datos
+               
+                  t = em.getTransaction(); 
                   t.begin();
                   em.persist(user);          
                   t.commit();       
@@ -442,7 +466,7 @@ public class Controller extends HttpServlet {
            
           }else if (op.equals("loginbundes")) {
             
-             String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
+             String nick = request.getParameter("nick");     
              String pass = request.getParameter("pass");
              
              q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = '"+nick+"' and u.pass ='"+pass+"'");
@@ -452,13 +476,13 @@ public class Controller extends HttpServlet {
             }
                      
            
-            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+            if (user == null) {                
                   user = new Usuario(1);
                   user.setNick(nick);
  		  user.setPass(pass);
                 
-                //con estas lineas hacemos el insert, para inserta el dato en la base de datos 
-                  t = em.getTransaction(); //lo inserto en la  base de datos
+                
+                  t = em.getTransaction(); 
                   t.begin();
                   em.persist(user);          
                   t.commit();       
@@ -470,7 +494,7 @@ public class Controller extends HttpServlet {
              
           }else if (op.equals("loginfrancia")) {
             
-             String nick = request.getParameter("nick");     //aqui paso lo que me pasa el formulario 
+             String nick = request.getParameter("nick");    
              String pass = request.getParameter("pass");
              
              q = em.createQuery("SELECT u FROM Usuario u WHERE u.nick = '"+nick+"' and u.pass ='"+pass+"'");
@@ -480,13 +504,13 @@ public class Controller extends HttpServlet {
             }
                      
            
-            if (user == null) {                //si no encuetrno el usuarios, lo creo 
+            if (user == null) {               
                   user = new Usuario(1);
                   user.setNick(nick);
  		  user.setPass(pass);
                 
-                //con estas lineas hacemos el insert, para inserta el dato en la base de datos 
-                  t = em.getTransaction(); //lo inserto en la  base de datos
+               
+                  t = em.getTransaction(); 
                   t.begin();
                   em.persist(user);          
                   t.commit();       
@@ -495,69 +519,55 @@ public class Controller extends HttpServlet {
             
              session.setAttribute("user", user);
              request.getRequestDispatcher("francia.jsp").forward(request, response);
-          } else if (op.equals("vaequipopremier")) {
-            String idequipo = request.getParameter("equipo");
-            //lo busco en la bbdd
-            equipopselected = em.find(Equipop.class, Integer.parseInt(idequipo));
-            jugadoresp = equipopselected.getJugadorpList();
-            
-            session.setAttribute("jugadoresp", jugadoresp);
-            
-            session.setAttribute("equipopselected", equipopselected);  //ver
-            session.setAttribute("nombre", equipopselected.getNombre()); // agrego el nombre del equipo
-            
-              session.removeAttribute("jugadoresfiltrados");
-              session.removeAttribute("jugadoresfiltradosp");
-               session.removeAttribute("escorrecta");
-             
+        
+         //Nos deslogueamos desde cualquier liga 
+        }else if (op.equals("logout")) {
+            //Para salir de la sesion hay que borrar el atributo de la sesion de usuario
+             session.removeAttribute("user");
+             session.removeAttribute("escorrecta");
+            //Recargamos la home.jsp
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+         }else if (op.equals("logoutpremier")) {          
+             session.removeAttribute("user");    
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
-            
-          } else if (op.equals("vaequipoitalia")) {
-            String idequipo = request.getParameter("equipo");
-            //lo busco en la bbdd
-            equipoitselected = em.find(Equipoit.class, Integer.parseInt(idequipo));
-            jugadoresit = equipoitselected.getJugadoritList();
-            
-            session.setAttribute("jugadoresit", jugadoresit);
-            
-            session.setAttribute("equipoitselected", equipoitselected);  //ver
-            session.setAttribute("nombre", equipoitselected.getNombre()); // agrego el nombre del equipo
-            
-              session.removeAttribute("jugadoresfiltrados");
-              session.removeAttribute("jugadoresfiltradosit");
-             
+         }else if (op.equals("logoutitalia")) {        
+             session.removeAttribute("user");
             request.getRequestDispatcher("italia.jsp").forward(request, response);
-           } else if (op.equals("vaequipobundes")) {
-            String idequipo = request.getParameter("equipo");
-            //lo busco en la bbdd
-            equipobuselected = em.find(Equipobu.class, Integer.parseInt(idequipo));
-            jugadoresbu = equipobuselected.getJugadorbuList();
+         }else if (op.equals("logoutbundes")) {     
+             session.removeAttribute("user");
+            request.getRequestDispatcher("bundes.jsp").forward(request, response);
             
-            session.setAttribute("jugadoresbu", jugadoresbu);
-            
-            session.setAttribute("equipobuselected", equipobuselected);  //ver
-            session.setAttribute("nombre", equipobuselected.getNombre()); // agrego el nombre del equipo
-            
-             session.removeAttribute("jugadoresfiltrados");
-             session.removeAttribute("jugadoresfiltradosbu");
+         }else if (op.equals("logoutfrancia")) {    
+             session.removeAttribute("user");   
+            request.getRequestDispatcher("francia.jsp").forward(request, response);
+         
+            //Mandamos la pregunta desde una de las dos ligas donde esta hecho
+         
+         } else if (op.equals("vapregunta")) {
+           String idpregunta = request.getParameter("pregunta");
+           q = em.createQuery("SELECT p FROM Pregunta p WHERE p.id = :id");
+           q.setParameter("id", Integer.parseInt(idpregunta));
+            Pregunta preguntaseleccionada = (Pregunta)q.getSingleResult();
              
-            request.getRequestDispatcher("bundes.jsp").forward(request, response);  
-           } else if (op.equals("vaequipofrancia")) {
-            String idequipo = request.getParameter("equipo");
-            //lo busco en la bbdd
-            equipofrselected = em.find(Equipofr.class, Integer.parseInt(idequipo));
-            jugadoresfr = equipofrselected.getJugadorfrList();
+             session.setAttribute("preguntaseleccionada", preguntaseleccionada);
             
-            session.setAttribute("jugadoresfr", jugadoresfr);
+             session.removeAttribute("escorrecta");
+            request.getRequestDispatcher("home.jsp").forward(request, response); 
             
-            session.setAttribute("equipofrselected", equipofrselected);  //ver
-            session.setAttribute("nombre", equipofrselected.getNombre()); // agrego el nombre del equipo
-            
-            session.removeAttribute("jugadoresfiltrados");
-            session.removeAttribute("jugadoresfiltradosfr");
+         } else if (op.equals("vapreguntap")) {
+           String idpregunta = request.getParameter("pregunta");
+           q = em.createQuery("SELECT p FROM Preguntap p WHERE p.id = :id");
+           q.setParameter("id", Integer.parseInt(idpregunta));
+            Preguntap preguntapseleccionada = (Preguntap)q.getSingleResult();
              
-            request.getRequestDispatcher("francia.jsp").forward(request, response);     
+             session.setAttribute("preguntapseleccionada", preguntapseleccionada);
+            
+             session.removeAttribute("escorrecta");
+            request.getRequestDispatcher("Premier.jsp").forward(request, response);    
+         
            
+         
+         
         }else if (op.equals("allrespuestas")) {
  
             String idpregunta = request.getParameter("idpregunta");         //esto es lo que mando desde el myjs
@@ -570,7 +580,7 @@ public class Controller extends HttpServlet {
             
          }else if (op.equals("allrespuestasp")) {
  
-            String idpregunta = request.getParameter("idpregunta");         //esto es lo que mando desde el myjs
+            String idpregunta = request.getParameter("idpregunta");      
             preguntapselected = em.find(Preguntap.class, Integer.parseInt(idpregunta));              // 
                 
            session.setAttribute("respuestas", preguntapselected.getRespuestapList());
@@ -580,7 +590,7 @@ public class Controller extends HttpServlet {
         
         }else if (op.equals("varespuesta")) {
  
-            String idrespuesta = request.getParameter("respuesta");         //esto es lo que mando desde el myjs
+            String idrespuesta = request.getParameter("respuesta");         
             respuestaselected = em.find(Respuesta.class, Integer.parseInt(idrespuesta));        
                 
            session.setAttribute("escorrecta", respuestaselected);
@@ -589,7 +599,7 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }else if (op.equals("varespuestap")) {
  
-            String idrespuesta = request.getParameter("respuesta");         //esto es lo que mando desde el myjs
+            String idrespuesta = request.getParameter("respuesta");        
             respuestapselecetd = em.find(Respuestap.class, Integer.parseInt(idrespuesta));        
                 
            session.setAttribute("escorrecta", respuestapselecetd);
@@ -598,8 +608,6 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("Premier.jsp").forward(request, response);
         }
 
-        
-        
         
     }
 

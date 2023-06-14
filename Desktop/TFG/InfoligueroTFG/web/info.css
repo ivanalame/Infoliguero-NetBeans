@@ -9,7 +9,7 @@
 
 .fondo{
   background-image: url('./img/cesped3.jpg');
-  background-size: 1920px 1080px; /* Tamaño fijo de la imagen de fondo */
+  background-size: 1920px 1080px; 
   background-repeat: no-repeat;
   background-attachment: fixed; /* Establece la imagen de fondo fija, no se mueve con el desplazamiento de la página */
   overflow-x: hidden;

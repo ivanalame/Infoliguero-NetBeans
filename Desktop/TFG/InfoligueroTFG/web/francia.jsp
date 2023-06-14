@@ -32,8 +32,7 @@
           List<Jugadorfr> jugadoresfr = (List<Jugadorfr>) session.getAttribute("jugadoresfr");
            Equipofr equipoSeleccionado = (Equipofr) session.getAttribute("equipofrselected");
             List<Jugadorfr> jugadoresfiltradosfr = (List<Jugadorfr>) session.getAttribute("jugadoresfiltradosfr");
-       //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
-        //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
+      
      Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
          Usuario user = (Usuario) session.getAttribute("user");
         %>

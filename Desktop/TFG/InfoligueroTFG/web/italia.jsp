@@ -31,8 +31,7 @@
           List<Jugadorit> jugadoresit = (List<Jugadorit>) session.getAttribute("jugadoresit");
            Equipoit equipoSeleccionado = (Equipoit) session.getAttribute("equipoitselected");
             List<Jugadorit> jugadoresfiltradosit = (List<Jugadorit>) session.getAttribute("jugadoresfiltradosit");
-       //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
-        //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
+      
          Pregunta preguntaseleccionada = (Pregunta) session.getAttribute("preguntaseleccionada");
      
          Usuario user = (Usuario) session.getAttribute("user");

@@ -36,8 +36,7 @@
           List<Jugadorp> jugadoresp = (List<Jugadorp>) session.getAttribute("jugadoresp");
           List<Jugadorp> jugadoresfiltradosp = (List<Jugadorp>) session.getAttribute("jugadoresfiltradosp");
           Equipop equipoSeleccionado = (Equipop) session.getAttribute("equipopselected"); 
-       //   List<Pregunta> preguntas = (List<Pregunta>) session.getAttribute("preguntas");
-        //  List<Respuesta> respuestas = (List<Respuesta>) session.getAttribute("respuestas");
+      
           Preguntap preguntapseleccionada = (Preguntap) session.getAttribute("preguntapseleccionada");
          Respuestap escorrecta = (Respuestap) session.getAttribute("escorrecta"); 
      
